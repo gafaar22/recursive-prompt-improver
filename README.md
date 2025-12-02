@@ -21,7 +21,7 @@ RPI is a desktop/web application designed to help developers test, improve, and 
 - **Import/Export**: Export and import sessions, conversations, tools, agents, and MCP servers as JSON files for backup or sharing
 - **Real-time Streaming**: Stream AI responses in real-time during conversational loops
 - **Per-Test Configuration**: Override model, context, and validation settings for individual test cases
-- **Local Storage**: All data is stored locally for privacy and offline access (supports localStorage or IndexedDB - see [STORAGE.md](STORAGE.md))
+- **Local Storage**: All data is stored locally for privacy and offline access
 - **Auto Setup**: Easy auto setup, quickly add local providers (Ollama, LMStudio)
 
 ![RPI Settings](docs/screen/settings.png)
