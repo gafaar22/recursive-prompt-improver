@@ -1,0 +1,409 @@
+// Component-specific styles for Carbon components and custom elements
+.rpi {
+  /* Capability Tags - shared component for model/agent capabilities */
+  .capability-tags {
+    display: flex;
+    gap: 0.25rem;
+    flex-shrink: 0;
+
+    .cds--tag__label {
+      display: flex;
+    }
+  }
+
+  /* Form and input containers */
+  #formcontainer {
+    transition: all;
+    transition-duration: 500ms;
+    overflow: hidden;
+    row-gap: layout.$spacing-05;
+    max-height: 1700px; /* fake max height of the form container to animate */
+
+    &.isFullsceen {
+      max-height: 0px;
+    }
+
+    & .clearForm {
+      transition: all;
+      transition-duration: 500ms;
+      opacity: 1;
+      right: 3rem;
+    }
+
+    &.isFullsceen .clearForm {
+      opacity: 0;
+    }
+  }
+
+  #output {
+    transition: all;
+    transition-duration: 700ms;
+    min-height: 0;
+    font-family: monospace;
+    font-size: 0.75rem;
+  }
+
+  .isFullsceen #output {
+    min-height: calc(100vh - 350px);
+    line-height: 1.5rem;
+  }
+
+  .codeSnippet {
+    max-height: 60vh;
+    overflow: auto;
+    min-width: 100%;
+    margin-top: layout.$spacing-04;
+  }
+
+  .formGroup {
+    margin-bottom: layout.$spacing-04;
+    overflow: hidden;
+    display: contents;
+  }
+
+  .formItem {
+    margin-bottom: layout.$spacing-06;
+  }
+
+  .warningContainer {
+    margin-top: layout.$spacing-04;
+    color: theme.$support-warning;
+    font-size: 0.875rem;
+
+    .errorMsg {
+      color: theme.$support-error;
+    }
+  }
+
+  .tableActionsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .tableActionsDiv {
+      display: flex;
+      align-items: center;
+      gap: layout.$spacing-03;
+      margin-right: layout.$spacing-05;
+    }
+  }
+
+  // Optional: If you want ellipsis for overflow
+  .table-cell-nowrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; // Adjust as needed
+  }
+
+  .contextPage,
+  .sessionsPage,
+  .settingsPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: layout.$spacing-04;
+    margin-right: layout.$spacing-07;
+  }
+
+  .clearForm {
+    margin-top: -1.2rem;
+    float: right;
+    position: absolute;
+    right: 1rem;
+    z-index: 1;
+  }
+
+  .testAboveActionsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: -1 * layout.$spacing-05;
+    margin-top: -1 * layout.$spacing-05;
+    z-index: 1;
+    position: relative;
+
+    .testLastScoreContainer {
+      .cds--popover-container {
+        padding: 0.4rem;
+      }
+    }
+
+    .testSettingsContainer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .appliedContextTag {
+        margin-right: 0.5rem;
+        .cds--tag__label {
+          max-width: 4rem;
+        }
+      }
+    }
+  }
+
+  .textAreasContainer {
+    display: flex;
+    align-items: center;
+
+    .testIn,
+    .testOut {
+      flex-basis: calc(50% - 20px);
+    }
+    .autoFillOutput {
+      flex-basis: 40px;
+      width: 40px;
+      max-width: 40px;
+      margin: 0 0.5rem;
+    }
+  }
+
+  .inlineLoadingAsHelperText {
+    min-block-size: auto;
+    margin-left: 2px;
+    max-width: 80%;
+
+    .cds--inline-loading__text {
+      font-size: 0.75rem;
+    }
+  }
+
+  .status-column {
+    .loadingAndAbortContainer {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-top: 1rem;
+
+      .cds--inline-loading {
+        inline-size: auto;
+      }
+    }
+  }
+
+  #outputcontainer {
+    row-gap: layout.$spacing-06;
+    padding-bottom: layout.$spacing-07;
+  }
+
+  .outputActionsContainer {
+    margin-top: -1 * layout.$spacing-06;
+    float: right;
+    position: absolute;
+    right: 3rem;
+    z-index: 1;
+  }
+
+  .outputTextarea textarea,
+  #test-result {
+    border: 1px solid theme.$border-subtle;
+  }
+
+  .filtersContainer {
+    grid-column: 1 / -1;
+    overflow: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid theme.$layer-hover;
+
+    .addContainer {
+      display: flex;
+      justify-content: end;
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .providerModal .cds--modal-container {
+    min-height: calc(100vh - 100px);
+  }
+
+  // Header warning icon
+  .header-warning-icon {
+    color: theme.$support-warning;
+    margin-right: 5px;
+    margin-bottom: -3px;
+  }
+
+  // MCP server indicator in header
+  .mcp-server-indicator {
+    margin-right: 6px;
+    color: #161616;
+    background-color: #24a148;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+  }
+
+  // Knowledge indexing status with stop button
+  .knowledge-indexing-status {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .cds--inline-loading {
+      inline-size: auto;
+    }
+  }
+
+  // Form helper text variants
+  .form-helper-text-error {
+    overflow: visible;
+    display: inline-block;
+    color: theme.$support-error;
+  }
+
+  .form-helper-text-secondary {
+    font-size: 0.875rem;
+    color: theme.$text-secondary;
+  }
+
+  .form-text-italic-secondary {
+    font-style: italic;
+    color: theme.$text-secondary;
+  }
+
+  .form-text-italic-secondary-inline {
+    margin-left: 0.5rem;
+    font-style: italic;
+    color: theme.$text-secondary;
+  }
+
+  .button-column {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @media (max-width: 650px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  // SpeechTextArea component styles
+  .speech-textarea-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    .speech-textarea-mic-button {
+      position: absolute;
+      bottom: 0.3rem;
+      right: 0.4rem;
+      z-index: 1;
+
+      // Animated when recording
+      &--recording {
+        animation: flash 1.5s ease-in-out infinite;
+
+        svg {
+          fill: theme.$interactive;
+        }
+      }
+
+      // Ensure button stays visible on different textarea heights
+      &:hover {
+        background-color: theme.$layer-hover;
+      }
+    }
+
+    // Add padding to textarea to prevent text from going under mic button
+    .cds--text-area {
+      padding-right: 3rem;
+    }
+  }
+
+  // MCP Exposed Server styles
+  .exposed-server-accordion-title {
+    display: flex;
+    align-items: center;
+    gap: layout.$spacing-03;
+  }
+
+  .exposed-server-count {
+    font-size: 0.75rem;
+    color: $text-secondary;
+    font-weight: 400;
+    padding-left: 0.5rem;
+  }
+
+  .status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #8d8d8d; // gray - inactive
+    flex-shrink: 0;
+
+    &--active {
+      background-color: #24a148; // green - active
+    }
+  }
+
+  .exposed-server-tile {
+    padding: layout.$spacing-05;
+  }
+
+  .exposed-server-content {
+    display: flex;
+    flex-direction: column;
+    gap: layout.$spacing-05;
+    max-width: 600px;
+  }
+
+  .exposed-server-controls {
+    display: flex;
+    flex-direction: column;
+    gap: layout.$spacing-05;
+  }
+
+  .exposed-server-toggle-row {
+    display: flex;
+    align-items: flex-end;
+    gap: layout.$spacing-07;
+    flex-wrap: wrap;
+  }
+
+  .exposed-server-port {
+    max-width: 200px;
+
+    .cds--number input {
+      padding-right: 0.5rem;
+    }
+  }
+
+  .exposed-server-url {
+    display: flex;
+    flex-direction: column;
+    gap: layout.$spacing-02;
+    flex: 1;
+  }
+
+  .exposed-server-url-row {
+    display: flex;
+    align-items: flex-end;
+    gap: layout.$spacing-05;
+    flex-wrap: wrap;
+  }
+
+  .exposed-server-url-content {
+    display: flex;
+    align-items: center;
+    gap: layout.$spacing-03;
+    border-bottom: 1px solid theme.$border-strong;
+  }
+
+  .exposed-server-url-code {
+    background-color: theme.$layer-01;
+    padding: layout.$spacing-03 layout.$spacing-04;
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: theme.$text-secondary;
+  }
+
+  .exposed-server-selection {
+    width: 100%;
+  }
+}

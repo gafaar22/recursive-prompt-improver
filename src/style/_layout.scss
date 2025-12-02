@@ -1,0 +1,126 @@
+.rpi {
+  .app-content {
+    margin-top: layout.$spacing-10;
+    padding: layout.$spacing-04;
+    flex: 1;
+  }
+
+  .cds--content {
+    margin-top: layout.$spacing-10;
+    padding: 0 1rem;
+    flex: 1;
+  }
+
+  .bx--content {
+    margin-top: layout.$spacing-10;
+    padding: layout.$spacing-04;
+    flex: 1;
+  }
+
+  .cds--css-grid {
+    max-inline-size: unset;
+  }
+
+  .toastContainer {
+    position: fixed;
+    bottom: layout.$spacing-05;
+    right: layout.$spacing-05;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: layout.$spacing-03;
+
+    .toast-link {
+      font-size: 12px;
+      color: theme.$link-primary;
+    }
+  }
+
+  /* Flex utilities */
+  .flex-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .flex-align-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .flex-justify {
+    display: flex;
+    justify-content: center;
+  }
+
+  .flex-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .flex-space-between-end {
+    display: flex;
+    margin-bottom: 0.5rem;
+    align-items: end;
+    justify-content: space-between;
+  }
+
+  .align-items-flex-end {
+    align-items: flex-end;
+  }
+
+  .flex-end {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .flex-end-neg-margin {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -1rem;
+  }
+
+  .flex-gap-1rem {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .gap-05 {
+    gap: 0.5rem;
+  }
+
+  .flex-gap-1rem-margin-bottom {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .flex-gap-1rem-end {
+    display: flex;
+    gap: 1rem;
+    flex-grow: 1;
+    align-items: flex-end;
+  }
+
+  .flex-gap-1rem-margin-top {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  // Override Carbon's header responsive breakpoint from lg (1056px) to 650px
+  .cds--header__nav {
+    @media (max-width: 800px) {
+      display: none;
+    }
+    @media (min-width: 801px) {
+      display: flex;
+    }
+  }
+
+  .cds--header__menu-toggle {
+    @media (min-width: 801px) {
+      display: none;
+    }
+  }
+}

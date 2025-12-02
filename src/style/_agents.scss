@@ -1,0 +1,297 @@
+// Agents page and components styles
+
+.agents-page {
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    // margin-top: 1rem;
+  }
+}
+
+.agent-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 200px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px theme.$shadow;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid theme.$border-subtle-01;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: theme.$layer-accent-01;
+    color: theme.$icon-primary;
+    flex-shrink: 0;
+  }
+
+  &__title-section {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: theme.$text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__date {
+    font-size: 0.75rem;
+    color: theme.$text-secondary;
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  &__instructions {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: theme.$text-secondary;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__metadata {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  &__metadata-item {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  &__metadata-label {
+    color: theme.$text-secondary;
+    font-weight: 500;
+  }
+
+  &__metadata-value {
+    color: theme.$text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+  }
+
+  &__tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid theme.$border-subtle-01;
+  }
+}
+
+// Agent modal styles
+.agent-modal {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__instructions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__improve-actions {
+    display: flex;
+    gap: 0.25rem;
+  }
+}
+
+// Skeleton loader for agent cards
+.agents-skeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  // margin-top: 1rem;
+}
+
+.agent-card-skeleton {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  padding: 1rem;
+  background-color: theme.$layer-01;
+  border: 1px solid theme.$border-subtle-01;
+  border-radius: 4px;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid theme.$border-subtle-01;
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: theme.$skeleton-background;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  &__title-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__title {
+    height: 16px;
+    width: 60%;
+    background-color: theme.$skeleton-background;
+    border-radius: 2px;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  &__date {
+    height: 12px;
+    width: 40%;
+    background-color: theme.$skeleton-background;
+    border-radius: 2px;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    animation-delay: 0.1s;
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__instructions {
+    height: 12px;
+    background-color: theme.$skeleton-background;
+    border-radius: 2px;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    animation-delay: 0.2s;
+
+    &:nth-child(2) {
+      width: 90%;
+      animation-delay: 0.3s;
+    }
+
+    &:nth-child(3) {
+      width: 70%;
+      animation-delay: 0.4s;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-top: 1px solid theme.$border-subtle-01;
+  }
+
+  &__action-button {
+    width: 32px;
+    height: 32px;
+    background-color: theme.$skeleton-background;
+    border-radius: 4px;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+
+    &:nth-child(1) {
+      animation-delay: 0.5s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.7s;
+    }
+
+    &:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 672px) {
+  .agents-page {
+    .agents-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .agents-skeleton {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 673px) and (max-width: 1056px) {
+  .agents-page {
+    .agents-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .agents-skeleton {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

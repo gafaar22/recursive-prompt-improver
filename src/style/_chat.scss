@@ -1,0 +1,318 @@
+// Chat modal and chat message styles
+.chat-modal {
+  #chat-input-textarea {
+    min-height: 48px;
+    max-height: 200px;
+    overflow-y: auto;
+    resize: none;
+    width: 100%;
+    height: 48px;
+    background: transparent;
+    border: 0px;
+    padding-top: 13px;
+    padding-right: 20px;
+  }
+
+  .cds--modal-content {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 9.5rem);
+    min-height: calc(100vh - 9.5rem);
+  }
+
+  &__navbar {
+    padding: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-top: 1px solid theme.$border-subtle;
+    border-bottom: 1px solid theme.$border-subtle;
+    gap: $spacing-03;
+
+    &-actions_left {
+      width: 30%;
+    }
+    &-actions_center {
+      width: 30%;
+    }
+
+    &-actions_right {
+      display: flex;
+      gap: $spacing-03;
+      margin-right: $spacing-03;
+      justify-content: end;
+      width: 30%;
+    }
+
+    &-actions_center {
+      display: flex;
+      align-items: center;
+      gap: $spacing-05;
+      flex: 1;
+      justify-content: center;
+    }
+
+    &-actions_left {
+      display: flex;
+      align-items: center;
+      gap: $spacing-03;
+    }
+  }
+
+  &__knowledge-select {
+    max-width: 300px;
+  }
+
+  &__model-info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-02;
+    font-size: 0.75rem;
+    color: theme.$text-secondary;
+  }
+
+  &__model-name {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__token-count {
+    font-size: 0.75rem;
+    color: theme.$text-secondary;
+    background-color: theme.$layer-01;
+  }
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-06;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-04;
+    background-color: theme.$background;
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: theme.$text-secondary;
+    text-align: center;
+    opacity: 0.6;
+  }
+
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: $spacing-05;
+    padding-left: $spacing-05;
+  }
+
+  &__stop-button {
+    min-height: 32px;
+  }
+
+  &__max-iterations-prompt {
+    padding: $spacing-05;
+    margin: $spacing-04 0;
+    background-color: theme.$background;
+    border: 1px solid theme.$border-strong;
+    border-radius: 8px;
+  }
+
+  &__max-iterations-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-04;
+  }
+
+  &__max-iterations-text {
+    margin: 0;
+    font-size: 0.875rem;
+    color: theme.$text-primary;
+  }
+
+  &__max-iterations-actions {
+    display: flex;
+    gap: $spacing-03;
+    justify-content: flex-start;
+  }
+
+  &__input {
+    padding: 0;
+    border-top: 1px solid theme.$border-subtle;
+    background-color: theme.$layer-01;
+  }
+}
+
+.chat-input {
+  display: flex;
+  gap: 0;
+  align-items: flex-end;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border-radius: 0;
+
+  &--drag-over {
+    background: rgba(15, 98, 254, 0.1);
+    outline: 2px dashed #0f62fe;
+    outline-offset: -2px;
+  }
+
+  &__media-button {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &__media-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    font-size: 0.65rem;
+  }
+
+  .cds--text-area-wrapper {
+    flex: 1;
+  }
+
+  .cds--btn {
+    height: fit-content;
+  }
+}
+
+.chat-message {
+  display: flex;
+  margin-bottom: $spacing-03;
+
+  &--user {
+    justify-content: flex-end;
+
+    .chat-message__content {
+      align-items: flex-end;
+    }
+
+    .chat-message__bubble {
+      background-color: theme.$layer-accent;
+      color: theme.$text-on-color;
+    }
+  }
+
+  &--assistant {
+    justify-content: flex-start;
+
+    .chat-message__content {
+      align-items: flex-start;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    gap: $spacing-02;
+  }
+
+  &__role {
+    font-size: 0.75rem;
+    color: theme.$text-secondary;
+    padding: 0 $spacing-03;
+  }
+
+  &__tokens {
+    color: theme.$text-helper;
+    font-size: 0.7rem;
+  }
+
+  &__rag-info {
+    color: theme.$support-success;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  &__images-info {
+    color: theme.$support-info;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  &__images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-03;
+    margin-bottom: $spacing-03;
+  }
+
+  &__image-preview {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid theme.$border-subtle;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__bubble {
+    padding: 0.7rem;
+    min-block-size: auto;
+    border-radius: 8px;
+    word-wrap: break-word;
+    font-size: 0.8rem;
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  &__tool-calls-header {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: $spacing-02;
+    color: theme.$text-secondary;
+  }
+
+  &__tool-call {
+    margin-bottom: $spacing-02;
+    // padding: $spacing-02;
+    background-color: theme.$layer-02;
+    border-radius: 4px;
+    font-size: 0.875rem;
+
+    strong {
+      display: block;
+      margin-bottom: $spacing-02;
+      color: theme.$text-primary;
+      font-size: 0.75rem;
+      font-style: italic;
+    }
+  }
+
+  &__tool-arguments {
+    margin: 0;
+    padding: 0.6rem 0.8rem;
+    background-color: theme.$layer-01;
+    border-radius: 4px;
+    font-size: 0.55rem;
+    overflow-x: auto;
+    white-space: pre;
+    font-family: "IBM Plex Mono", monospace;
+  }
+}

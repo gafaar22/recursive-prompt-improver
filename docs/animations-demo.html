@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPI Animation Classes Demo</title>
+    <style>
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #161616;
+            color: #f4f4f4;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section h2 {
+            border-bottom: 2px solid #393939;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #78a9ff;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .demo-item {
+            background: #262626;
+            border: 1px solid #393939;
+            border-radius: 4px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .demo-item:hover {
+            background: #333333;
+            border-color: #525252;
+        }
+        
+        .demo-icon {
+            width: 48px;
+            height: 48px;
+            background: #78a9ff;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .demo-label {
+            font-size: 0.875rem;
+            color: #c6c6c6;
+            margin-top: 0.5rem;
+        }
+        
+        .code-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: #78a9ff;
+            background: #161616;
+            padding: 0.25rem 0.5rem;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+        
+        /* Import actual animation keyframes */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        
+        @keyframes flash {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.3; }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes flip-horizontal {
+            0% { transform: rotateY(0); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        @keyframes flip-vertical {
+            0% { transform: rotateX(0); }
+            100% { transform: rotateX(360deg); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoom-in {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Apply animations */
+        .animate-pulse { animation: pulse 1.5s ease-in-out infinite; }
+        .animate-bounce { animation: bounce 1s cubic-bezier(0.28, 0.84, 0.42, 1) infinite; }
+        .animate-flash { animation: flash 1s infinite; }
+        .animate-rotate { animation: rotate 2s linear infinite; }
+        .animate-flip-horizontal { animation: flip-horizontal 2s infinite; transform-style: preserve-3d; }
+        .animate-flip-vertical { animation: flip-vertical 2s infinite; transform-style: preserve-3d; }
+        .animate-shake { animation: shake 0.5s infinite; }
+        .animate-wiggle { animation: wiggle 0.8s infinite; }
+        .animate-heartbeat { animation: heartbeat 1.3s ease-in-out infinite; }
+        .animate-fade-in { animation: fade-in 2s infinite; }
+        .animate-zoom-in { animation: zoom-in 1s infinite; }
+        
+        /* Hover animations */
+        .demo-item-hover:hover .demo-icon {
+            animation-duration: 0.8s !important;
+            animation-iteration-count: 1 !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 RPI Animation Classes Demo</h1>
+    
+    <div class="section">
+        <h2>Continuous Animations (always running)</h2>
+        <div class="demo-grid">
+            <div class="demo-item">
+                <div class="demo-icon animate-pulse">✨</div>
+                <div class="demo-label">Pulse</div>
+                <div class="code-label">animate-pulse</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-bounce">🏀</div>
+                <div class="demo-label">Bounce</div>
+                <div class="code-label">animate-bounce</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-flash">💡</div>
+                <div class="demo-label">Flash</div>
+                <div class="code-label">animate-flash</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-rotate">⚙️</div>
+                <div class="demo-label">Rotate</div>
+                <div class="code-label">animate-rotate</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-flip-horizontal">🔄</div>
+                <div class="demo-label">Flip Horizontal</div>
+                <div class="code-label">animate-flip-horizontal</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-flip-vertical">🔃</div>
+                <div class="demo-label">Flip Vertical</div>
+                <div class="code-label">animate-flip-vertical</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-shake">📳</div>
+                <div class="demo-label">Shake</div>
+                <div class="code-label">animate-shake</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-wiggle">🎯</div>
+                <div class="demo-label">Wiggle</div>
+                <div class="code-label">animate-wiggle</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-heartbeat">❤️</div>
+                <div class="demo-label">Heartbeat</div>
+                <div class="code-label">animate-heartbeat</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-fade-in">👻</div>
+                <div class="demo-label">Fade In</div>
+                <div class="code-label">animate-fade-in</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="demo-icon animate-zoom-in">🔍</div>
+                <div class="demo-label">Zoom In</div>
+                <div class="code-label">animate-zoom-in</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Hover Animations (hover over items)</h2>
+        <p style="color: #c6c6c6; margin-bottom: 1rem;">Hover over the icons to see the animations</p>
+        <div class="demo-grid">
+            <div class="demo-item demo-item-hover">
+                <div class="demo-icon" onmouseenter="this.style.animation='pulse 0.8s ease-in-out';" onanimationend="this.style.animation='';">✨</div>
+                <div class="demo-label">Pulse on Hover</div>
+                <div class="code-label">animate-pulse-hover</div>
+            </div>
+            
+            <div class="demo-item demo-item-hover">
+                <div class="demo-icon" onmouseenter="this.style.animation='bounce 0.8s cubic-bezier(0.28, 0.84, 0.42, 1)';" onanimationend="this.style.animation='';">🏀</div>
+                <div class="demo-label">Bounce on Hover</div>
+                <div class="code-label">animate-bounce-hover</div>
+            </div>
+            
+            <div class="demo-item demo-item-hover">
+                <div class="demo-icon" onmouseenter="this.style.animation='rotate 0.6s linear';" onanimationend="this.style.animation='';">⚙️</div>
+                <div class="demo-label">Rotate on Hover</div>
+                <div class="code-label">animate-rotate-hover</div>
+            </div>
+            
+            <div class="demo-item demo-item-hover">
+                <div class="demo-icon" onmouseenter="this.style.animation='shake 0.5s';" onanimationend="this.style.animation='';">📳</div>
+                <div class="demo-label">Shake on Hover</div>
+                <div class="code-label">animate-shake-hover</div>
+            </div>
+            
+            <div class="demo-item demo-item-hover">
+                <div class="demo-icon" onmouseenter="this.style.animation='wiggle 0.6s';" onanimationend="this.style.animation='';">🎯</div>
+                <div class="demo-label">Wiggle on Hover</div>
+                <div class="code-label">animate-wiggle-hover</div>
+            </div>
+            
+            <div class="demo-item demo-item-hover">
+                <div class="demo-icon" onmouseenter="this.style.animation='flip-horizontal 1s'; this.style.transformStyle='preserve-3d';" onanimationend="this.style.animation='';">🔄</div>
+                <div class="demo-label">Flip Horizontal on Hover</div>
+                <div class="code-label">animate-flip-horizontal-hover</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Usage Examples</h2>
+        <div style="background: #262626; padding: 1.5rem; border-radius: 4px; border: 1px solid #393939;">
+            <h3 style="color: #78a9ff; margin-top: 0;">Basic Usage</h3>
+            <pre style="color: #c6c6c6; overflow-x: auto;"><code>&lt;!-- Simple animation --&gt;
+&lt;button className="animate-pulse"&gt;Click me&lt;/button&gt;
+
+&lt;!-- With modifiers --&gt;
+&lt;div className="animate-bounce animated-slow animated-infinite"&gt;
+  Bouncing slowly forever
+&lt;/div&gt;
+
+&lt;!-- Hover animation --&gt;
+&lt;button className="animate-pulse-hover"&gt;Hover me&lt;/button&gt;
+
+&lt;!-- Icon animation --&gt;
+&lt;svg className="icon-rotate"&gt;...&lt;/svg&gt;
+
+&lt;!-- Button animation --&gt;
+&lt;button className="button-pulse"&gt;Animated Button&lt;/button&gt;</code></pre>
+            
+            <h3 style="color: #78a9ff; margin-top: 2rem;">Available Modifiers</h3>
+            <ul style="color: #c6c6c6;">
+                <li><code style="background: #161616; padding: 0.25rem 0.5rem; border-radius: 2px; color: #78a9ff;">animated-fast</code> - 0.5s duration</li>
+                <li><code style="background: #161616; padding: 0.25rem 0.5rem; border-radius: 2px; color: #78a9ff;">animated-slow</code> - 2s duration</li>
+                <li><code style="background: #161616; padding: 0.25rem 0.5rem; border-radius: 2px; color: #78a9ff;">animated-slower</code> - 3s duration</li>
+                <li><code style="background: #161616; padding: 0.25rem 0.5rem; border-radius: 2px; color: #78a9ff;">animated-infinite</code> - Loop forever</li>
+                <li><code style="background: #161616; padding: 0.25rem 0.5rem; border-radius: 2px; color: #78a9ff;">animated-delay-1s</code> - 1s delay before starting</li>
+                <li><code style="background: #161616; padding: 0.25rem 0.5rem; border-radius: 2px; color: #78a9ff;">animated-delay-2s</code> - 2s delay before starting</li>
+                <li><code style="background: #161616; padding: 0.25rem 0.5rem; border-radius: 2px; color: #78a9ff;">animated-delay-3s</code> - 3s delay before starting</li>
+            </ul>
+            
+            <h3 style="color: #78a9ff; margin-top: 2rem;">Animation Classes</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <div>
+                    <h4 style="color: #78a9ff; font-size: 0.875rem;">Basic Animations</h4>
+                    <ul style="color: #c6c6c6; font-size: 0.875rem; font-family: 'IBM Plex Mono', monospace;">
+                        <li>animate-pulse</li>
+                        <li>animate-bounce</li>
+                        <li>animate-flash</li>
+                        <li>animate-shake</li>
+                        <li>animate-wiggle</li>
+                        <li>animate-swing</li>
+                        <li>animate-heartbeat</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #78a9ff; font-size: 0.875rem;">Rotation & Flipping</h4>
+                    <ul style="color: #c6c6c6; font-size: 0.875rem; font-family: 'IBM Plex Mono', monospace;">
+                        <li>animate-rotate</li>
+                        <li>animate-rotate-reverse</li>
+                        <li>animate-flip-horizontal</li>
+                        <li>animate-flip-vertical</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #78a9ff; font-size: 0.875rem;">Fade & Slide</h4>
+                    <ul style="color: #c6c6c6; font-size: 0.875rem; font-family: 'IBM Plex Mono', monospace;">
+                        <li>animate-fade-in</li>
+                        <li>animate-fade-out</li>
+                        <li>animate-slide-in-left</li>
+                        <li>animate-slide-in-right</li>
+                        <li>animate-slide-in-up</li>
+                        <li>animate-slide-in-down</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #78a9ff; font-size: 0.875rem;">Zoom & Scale</h4>
+                    <ul style="color: #c6c6c6; font-size: 0.875rem; font-family: 'IBM Plex Mono', monospace;">
+                        <li>animate-zoom-in</li>
+                        <li>animate-zoom-out</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #78a9ff; font-size: 0.875rem;">Icon Specific</h4>
+                    <ul style="color: #c6c6c6; font-size: 0.875rem; font-family: 'IBM Plex Mono', monospace;">
+                        <li>icon-rotate</li>
+                        <li>icon-pulse</li>
+                        <li>icon-bounce</li>
+                        <li>icon-wiggle</li>
+                        <li>icon-heartbeat</li>
+                        <li>icon-hover-rotate</li>
+                        <li>icon-hover-bounce</li>
+                        <li>icon-hover-pulse</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #78a9ff; font-size: 0.875rem;">Button Specific</h4>
+                    <ul style="color: #c6c6c6; font-size: 0.875rem; font-family: 'IBM Plex Mono', monospace;">
+                        <li>button-pulse</li>
+                        <li>button-bounce</li>
+                        <li>button-shake</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #78a9ff; font-size: 0.875rem;">Attention Seekers</h4>
+                    <ul style="color: #c6c6c6; font-size: 0.875rem; font-family: 'IBM Plex Mono', monospace;">
+                        <li>attention-pulse</li>
+                        <li>attention-flash</li>
+                        <li>attention-shake</li>
+                        <li>attention-heartbeat</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #78a9ff; font-size: 0.875rem;">Utility</h4>
+                    <ul style="color: #c6c6c6; font-size: 0.875rem; font-family: 'IBM Plex Mono', monospace;">
+                        <li>loading-spinner</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 3rem; padding: 2rem; color: #8d8d8d;">
+        <p>All animations are scoped under the <code style="background: #262626; padding: 0.25rem 0.5rem; border-radius: 2px; color: #78a9ff;">.rpi</code> class</p>
+        <p>Animations use Carbon Design System color variables for consistency</p>
+    </div>
+</body>
+</html>

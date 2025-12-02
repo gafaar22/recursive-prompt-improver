@@ -1,0 +1,102 @@
+// Code editors and JSON schema editor styling
+.rpi {
+  // CodeMirror editor styling to match Carbon g100 and textarea inputs
+  .code-editor {
+    border: 1px solid theme.$border-subtle; // Match Carbon's border color
+    border-radius: 0;
+    overflow: hidden; // Force container to not expand
+    max-width: 100%; // Prevent horizontal growth
+    width: 100%; // Take full width of parent
+
+    .cm-editor {
+      background-color: theme.$field; // Use Carbon's field background color (same as textarea)
+      max-width: 100%; // Prevent editor from expanding
+
+      .cm-scroller {
+        font-family:
+          "IBM Plex Mono", "Menlo", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Courier,
+          monospace;
+        font-size: 0.75rem; // 12px - smaller to match input fields better
+        overflow-x: hidden !important; // Never allow horizontal scroll
+      }
+
+      .cm-gutters {
+        background-color: theme.$field;
+        border-right: 1px solid theme.$border-subtle;
+      }
+
+      .cm-activeLineGutter {
+        background-color: theme.$layer-hover;
+      }
+
+      // .cm-activeLine {
+      //   background-color: theme.$layer-selected-hover;
+      // }
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      .cm-editor {
+        background-color: theme.$field;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // JSON Schema Editor styles
+  .json-schema-editor-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .json-schema-editor {
+    border: 1px solid theme.$border-subtle;
+    border-radius: 0;
+    background-color: theme.$field;
+    width: 100%;
+
+    &:focus-within {
+      outline: 2px solid theme.$focus;
+      outline-offset: -2px;
+    }
+
+    &--invalid {
+      outline: 2px solid theme.$support-error;
+      outline-offset: -2px;
+
+      &:focus-within {
+        outline: 2px solid theme.$support-error;
+      }
+    }
+
+    .cm-editor {
+      background-color: theme.$field;
+      color: theme.$text-primary;
+      font-family:
+        "IBM Plex Mono", "Menlo", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Courier, monospace;
+      font-size: 0.75rem; // 12px - smaller to match input fields better
+      line-height: 1.5;
+    }
+
+    .cm-scroller {
+      overflow: auto;
+    }
+
+    .cm-content {
+      padding: 0.5rem;
+      min-height: 100%;
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      .cm-editor {
+        background-color: theme.$field;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

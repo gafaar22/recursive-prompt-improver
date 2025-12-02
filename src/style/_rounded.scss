@@ -1,0 +1,366 @@
+/*************** ROUNDED CARBON COMPONENTS **************/
+/* This file contains CSS rules to make Carbon Design System components rounded */
+
+/* Buttons */
+.cds--btn,
+.cds--btn--primary,
+.cds--btn--secondary,
+.cds--btn--tertiary,
+.cds--btn--ghost,
+.cds--btn--danger,
+.cds--btn--danger--primary,
+.cds--btn--danger--tertiary,
+.cds--btn--danger--ghost {
+  border-radius: 8px;
+}
+
+/* Text Inputs */
+.cds--text-input,
+.cds--text-input__field-wrapper,
+.cds--text-area,
+.cds--text-area__wrapper,
+.cds--number input[type="number"],
+.cds--password-input,
+.cds--search-input {
+  border-radius: 8px;
+}
+
+/* Dropdowns */
+.cds--dropdown,
+.cds--dropdown__wrapper,
+.cds--list-box,
+.cds--list-box__menu,
+.cds--list-box__menu-item,
+.cds--multi-select,
+.cds--combo-box {
+  border-radius: 8px;
+}
+
+/* Dropdown menu items - slight rounding for nested items */
+.cds--list-box__menu-item__option {
+  border-radius: 4px;
+}
+
+/* Select */
+.cds--select-input {
+  border-radius: 8px;
+}
+
+/* Modals */
+.cds--modal-container,
+.cds--modal-content {
+  border-radius: 12px;
+}
+
+/* Notifications & Toasts */
+.cds--inline-notification,
+.cds--toast-notification,
+.cds--actionable-notification {
+  border-radius: 8px;
+}
+
+/* Tags */
+.cds--tag,
+.cds--tag--red,
+.cds--tag--magenta,
+.cds--tag--purple,
+.cds--tag--blue,
+.cds--tag--cyan,
+.cds--tag--teal,
+.cds--tag--green,
+.cds--tag--gray,
+.cds--tag--cool-gray,
+.cds--tag--warm-gray,
+.cds--tag--high-contrast {
+  border-radius: 16px;
+}
+
+/* Toggles */
+.cds--toggle__switch {
+  border-radius: 16px;
+}
+
+.cds--toggle__appearance {
+  border-radius: 16px;
+}
+
+/* Radio Buttons */
+.cds--radio-button__appearance {
+  border-radius: 50%;
+}
+
+/* Checkboxes */
+.cds--checkbox-label::before {
+  border-radius: 4px;
+}
+
+/* Loading */
+.cds--loading,
+.cds--inline-loading {
+  border-radius: 8px;
+}
+
+/* Progress Bar */
+.cds--progress-bar,
+.cds--progress-bar__bar {
+  border-radius: 8px;
+}
+
+/* Tabs */
+.cds--tabs__nav,
+.cds--tab--list,
+.cds--tabs--contained .cds--tabs__nav {
+  border-radius: 8px 8px 0 0;
+}
+
+.cds--tab-content {
+  border-radius: 0 0 8px 8px;
+}
+
+/* Content Switcher */
+.cds--content-switcher,
+.cds--content-switcher-btn {
+  border-radius: 8px;
+}
+
+/* Accordion */
+.cds--accordion__item,
+.cds--accordion__content {
+  border-radius: 8px;
+}
+
+/* Data Table */
+.cds--data-table,
+.cds--data-table-container,
+.cds--data-table thead,
+.cds--data-table tbody {
+  border-radius: 8px;
+}
+
+.cds--data-table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.cds--data-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.cds--data-table tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.cds--data-table tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* Tile */
+.cds--tile,
+.cds--tile--clickable,
+.cds--tile--selectable,
+.cds--tile--expandable {
+  border-radius: 8px;
+}
+
+/* Structured List */
+.cds--structured-list,
+.cds--structured-list-row {
+  border-radius: 8px;
+}
+
+/* Code Snippet */
+.cds--snippet,
+.cds--snippet--single,
+.cds--snippet--multi,
+.cds--snippet--inline {
+  border-radius: 8px;
+}
+
+.cds--snippet--inline {
+  border-radius: 4px;
+}
+
+/* Breadcrumb */
+.cds--breadcrumb-item::after {
+  border-radius: 2px;
+}
+
+/* Link */
+.cds--link {
+  border-radius: 4px;
+}
+
+/* Overflow Menu */
+.cds--overflow-menu,
+.cds--overflow-menu-options {
+  border-radius: 8px;
+}
+
+.cds--overflow-menu-options__option {
+  border-radius: 4px;
+}
+
+/* Pagination */
+.cds--pagination,
+.cds--pagination__button,
+.cds--select-input {
+  border-radius: 8px;
+}
+
+/* Search */
+.cds--search,
+.cds--search-input {
+  border-radius: 8px;
+}
+
+/* Slider */
+.cds--slider__track {
+  border-radius: 8px;
+}
+
+.cds--slider__thumb {
+  border-radius: 50%;
+}
+
+/* Tooltip */
+.cds--tooltip,
+.cds--popover-content,
+.cds--popover-caret {
+  border-radius: 4px;
+}
+
+/* Date Picker */
+.cds--date-picker__input {
+  border-radius: 8px;
+}
+
+.flatpickr-calendar {
+  border-radius: 8px;
+}
+
+.flatpickr-day {
+  border-radius: 50%;
+}
+
+/* Time Picker */
+.cds--time-picker__input {
+  border-radius: 8px;
+}
+
+/* File Uploader */
+.cds--file__container,
+.cds--file-browse-btn,
+.cds--file__drop-container {
+  border-radius: 8px;
+}
+
+/* Number Input */
+.cds--number__controls {
+  border-radius: 0 8px 8px 0;
+}
+
+/* ComboBox */
+.cds--combo-box,
+.cds--combo-box .cds--list-box {
+  border-radius: 8px;
+}
+
+/* MultiSelect */
+.cds--multi-select .cds--list-box__menu {
+  border-radius: 8px;
+}
+
+.cds--multi-select .cds--tag {
+  border-radius: 16px;
+}
+
+/* AI Label */
+.cds--ai-label,
+.cds--ai-label__button {
+  border-radius: 8px;
+}
+
+.cds--slug,
+.cds--slug__button {
+  border-radius: 50%;
+}
+
+/* Contained List */
+.cds--contained-list,
+.cds--contained-list-item {
+  border-radius: 8px;
+}
+
+/* Side Nav */
+.cds--side-nav,
+.cds--side-nav__item {
+  border-radius: 8px;
+}
+
+/* Header */
+.cds--header-panel {
+  border-radius: 8px;
+}
+
+/* Switcher */
+.cds--switcher,
+.cds--switcher__item {
+  border-radius: 8px;
+}
+
+/* Tearsheet */
+.cds--tearsheet,
+.cds--tearsheet-container {
+  border-radius: 12px;
+}
+
+/* Loading Overlay */
+.cds--loading-overlay {
+  border-radius: 8px;
+}
+
+/* Inline Loading */
+.cds--inline-loading__animation {
+  border-radius: 50%;
+}
+
+/* ProgressIndicator */
+.cds--progress-step,
+.cds--progress-step-button {
+  border-radius: 8px;
+}
+
+.cds--progress-step svg {
+  border-radius: 50%;
+}
+
+/* SkeletonText */
+.cds--skeleton__text {
+  border-radius: 4px;
+}
+
+/* SkeletonPlaceholder */
+.cds--skeleton__placeholder {
+  border-radius: 8px;
+}
+
+/* Menu */
+.cds--menu,
+.cds--menu-item {
+  border-radius: 8px;
+}
+
+.cds--menu-item__option {
+  border-radius: 4px;
+}
+
+/* Popover */
+.cds--popover {
+  border-radius: 8px;
+}
+
+/* Layer */
+.cds--layer-one,
+.cds--layer-two,
+.cds--layer-three {
+  border-radius: 8px;
+}

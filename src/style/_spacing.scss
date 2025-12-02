@@ -1,0 +1,87 @@
+// Spacing utilities - Margins and padding
+.rpi {
+  /* Margin utilities */
+  .margin-bottom-2rem {
+    margin-bottom: 2rem;
+  }
+
+  .margin-bottom-1rem {
+    margin-bottom: 1rem;
+  }
+
+  .margin-bottom-half {
+    margin-bottom: 0.5rem;
+  }
+
+  .margin-left-1rem {
+    margin-left: 1rem;
+  }
+
+  .margin-right-1rem {
+    margin-right: 1rem;
+  }
+
+  .margin-top-half {
+    margin-top: 0.5rem;
+  }
+
+  .margin-top-1rem {
+    margin-top: 1rem;
+  }
+
+  .margin-top-2rem {
+    margin-top: 2rem;
+  }
+
+  .margin-top-0 {
+    margin-top: 0rem;
+  }
+
+  .margin-0 {
+    margin: 0;
+  }
+
+  .margin-1rem-0 {
+    margin: 1rem 0;
+  }
+
+  .margin-2rem-0 {
+    margin: 2rem 0;
+  }
+
+  .margin-03rem-0 {
+    margin: 0.3rem 0;
+  }
+
+  .margin-bottom-1rem-top-1rem {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  .margin-top-1rem-bottom-1rem {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Padding utilities */
+  .padding-1rem {
+    padding: 1rem;
+  }
+
+  .padding-0 {
+    padding: 0;
+  }
+
+  .padding-0-1rem {
+    padding: 0 1rem;
+  }
+
+  .padding-0-0-08rem {
+    padding: 0 0 0.8rem;
+    margin: 0;
+  }
+
+  .padding-top-3px {
+    padding-top: 3px;
+  }
+}

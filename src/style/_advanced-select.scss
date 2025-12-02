@@ -1,0 +1,198 @@
+// Advanced Select component styles (single selection variant)
+
+.advanced-select {
+  margin-bottom: layout.$spacing-03;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.9;
+  }
+
+  .advanced-select__button {
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    border: 0;
+
+    &:not(.cds--btn--disabled) {
+      color: inherit;
+    }
+
+    &--invalid {
+      outline: 2px solid theme.$support-error;
+      outline-offset: -2px;
+    }
+
+    // Apply ellipsis to the button text content
+    .cds--btn__content {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+      min-width: 0;
+    }
+
+    // Ensure icon doesn't prevent text from truncating
+    svg {
+      flex-shrink: 0;
+      margin-left: layout.$spacing-03;
+      margin-top: 2px;
+    }
+
+    .provider-icon svg {
+      margin: 0;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: transparent;
+      color: theme.$text-primary;
+    }
+  }
+
+  .advanced-select__button-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &__text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .cds--form__helper-text {
+    margin-top: layout.$spacing-02;
+    color: theme.$text-secondary;
+    font-size: 0.75rem;
+  }
+
+  .cds--form-requirement {
+    margin-top: layout.$spacing-02;
+    color: theme.$support-error;
+    font-size: 0.75rem;
+  }
+}
+
+.advanced-select-modal {
+  .cds--modal-container {
+    min-height: 70vh;
+    max-height: 90vh;
+  }
+
+  .cds--modal-header {
+    margin-block-end: 0.65rem;
+    padding-block-start: 0.65rem;
+  }
+
+  .cds--table-toolbar {
+    position: sticky;
+    top: -2px;
+    border-bottom: 1px solid theme.$border-subtle;
+  }
+
+  .advanced-select-modal__body {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    mask-image: none;
+  }
+
+  .advanced-select-table {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    td,
+    th {
+      white-space: wrap;
+    }
+
+    &__cell-with-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &__capabilities {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      flex-wrap: nowrap;
+
+      .capability-tag {
+        margin: 0;
+        font-size: 0.75rem;
+        line-height: 1.2;
+        padding: 2px 6px;
+      }
+    }
+
+    .cds--data-table-container {
+      flex: 1;
+      overflow: auto;
+    }
+
+    .cds--toolbar-content {
+      width: 100%;
+      display: flex;
+      gap: layout.$spacing-03;
+      flex-wrap: wrap;
+    }
+
+    .cds--search {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    &__filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .cds--multi-select {
+        min-width: 200px;
+        border: 0;
+      }
+    }
+
+    // Ensure table rows with disabled items are styled appropriately
+    .cds--data-table tr[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      .cds--radio-button-wrapper {
+        cursor: not-allowed;
+      }
+    }
+
+    // Make rows clickable with hover effect
+    .cds--data-table tbody tr {
+      cursor: pointer;
+      transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+
+      &:hover:not(.advanced-select-table__row--disabled) {
+        background-color: theme.$layer-hover-01;
+      }
+
+      &.advanced-select-table__row--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    // Style for selected rows
+    .cds--data-table tbody tr.cds--data-table--selected {
+      background-color: theme.$layer-selected-01;
+    }
+  }
+}

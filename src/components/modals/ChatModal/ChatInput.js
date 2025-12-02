@@ -1,0 +1,190 @@
+import React, { useState, useRef, useEffect } from "react";
+import { IconButton, Button } from "@carbon/react";
+import { Send, Image as ImageIcon } from "@carbon/icons-react";
+import { ROLES } from "@utils/constants";
+import { SpeechTextArea } from "@components/shared";
+import { useToast } from "@context/ToastContext";
+
+const ChatInput = ({
+  onSend,
+  isLoading = false,
+  messages = [],
+  supportsVision = false,
+  attachedImages = [],
+  onOpenMediaUpload,
+  onImageDrop,
+}) => {
+  const textareaRef = useRef(null);
+  const [message, setMessage] = useState("");
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [isDragOver, setIsDragOver] = useState(false);
+
+  const { showError } = useToast();
+
+  // Get user messages from history
+  const userMessages = messages.filter((msg) => msg.role === ROLES.USER).map((msg) => msg.content);
+
+  // Auto-grow textarea height
+  const adjustTextareaHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      const scrollHeight = textareaRef.current.scrollHeight;
+      textareaRef.current.style.height = `${scrollHeight}px`;
+    }
+  };
+
+  const handleSend = () => {
+    // Text message is required - images alone cannot be sent
+    if (message.trim() && !isLoading) {
+      onSend(message, attachedImages);
+      setMessage("");
+      setHistoryIndex(-1); // Reset history navigation
+      // Keep focus on the textarea after sending
+      setTimeout(() => {
+        if (textareaRef.current) {
+          textareaRef.current.focus();
+        }
+      }, 0);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+      return;
+    }
+
+    // Handle history navigation with up/down arrows
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+
+      const cursorPosition = textarea.selectionStart;
+      const textValue = textarea.value;
+      const isAtStart = cursorPosition === 0;
+      const isAtEnd = cursorPosition === textValue.length;
+      const isEmpty = textValue.trim() === "";
+
+      // Only navigate history if:
+      // - Text is empty, OR
+      // - We're currently navigating history (historyIndex >= 0), OR
+      // - ArrowUp at the start of text, OR
+      // - ArrowDown at the end of text
+      const shouldNavigate =
+        isEmpty ||
+        historyIndex >= 0 ||
+        (e.key === "ArrowUp" && isAtStart) ||
+        (e.key === "ArrowDown" && isAtEnd);
+
+      if (shouldNavigate && userMessages.length > 0) {
+        e.preventDefault();
+
+        if (e.key === "ArrowUp") {
+          // Navigate backwards (older messages)
+          const newIndex = historyIndex < userMessages.length - 1 ? historyIndex + 1 : historyIndex;
+          if (newIndex !== historyIndex) {
+            setHistoryIndex(newIndex);
+            setMessage(userMessages[userMessages.length - 1 - newIndex]);
+          }
+        } else if (e.key === "ArrowDown") {
+          // Navigate forwards (newer messages)
+          if (historyIndex > 0) {
+            const newIndex = historyIndex - 1;
+            setHistoryIndex(newIndex);
+            setMessage(userMessages[userMessages.length - 1 - newIndex]);
+          } else if (historyIndex === 0) {
+            // Return to empty state
+            setHistoryIndex(-1);
+            setMessage("");
+          }
+        }
+      }
+    }
+  };
+
+  // Handle drag & drop for images
+  const handleDragOver = (e) => {
+    if (!supportsVision) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+
+    if (!supportsVision || !onImageDrop) return;
+
+    const files = Array.from(e.dataTransfer.files);
+    const imageFiles = files.filter((file) => file.type.startsWith("image/"));
+
+    if (imageFiles.length === 0) {
+      showError("Invalid files", "Please drop image files only");
+      return;
+    }
+
+    onImageDrop(imageFiles);
+  };
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [message]);
+
+  // Determine if send button should be disabled
+  // Text message is always required (images alone cannot be sent)
+  const hasText = message.trim().length > 0;
+  const sendDisabled = isLoading || !hasText;
+
+  return (
+    <div
+      className={`chat-input ${isDragOver ? "chat-input--drag-over" : ""}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
+      {supportsVision && (
+        <div className="chat-input__media-button">
+          <IconButton
+            kind="ghost"
+            size="lg"
+            onClick={onOpenMediaUpload}
+            disabled={isLoading}
+            label="Add images"
+            align="right"
+            badgeCount={attachedImages.length > 0 ? attachedImages.length : undefined}
+          >
+            <ImageIcon />
+          </IconButton>
+        </div>
+      )}
+      <SpeechTextArea
+        ref={textareaRef}
+        id="chat-input-textarea"
+        labelText=""
+        placeholder="Ask your agent..."
+        value={message}
+        onChange={(e) => {
+          setMessage(e.target.value);
+          setHistoryIndex(-1); // Reset history when user types
+        }}
+        onKeyDown={handleKeyPress}
+        rows={1}
+        showError={showError}
+      />
+      <Button kind="ghost" size="lg" onClick={handleSend} disabled={sendDisabled} renderIcon={Send}>
+        Send
+      </Button>
+    </div>
+  );
+};
+
+export default ChatInput;

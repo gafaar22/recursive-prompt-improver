@@ -1,0 +1,138 @@
+// Miscellaneous utilities and helper classes
+.rpi {
+  .chart-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 220px;
+    overflow: auto;
+    text-overflow: ellipsis;
+    min-height: 40px;
+    align-items: center;
+  }
+
+  .form-group-half-width {
+    margin-bottom: 2rem;
+    max-width: 50%;
+  }
+
+  .code-snippet-monospace {
+    margin-left: 2rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+  }
+
+  .dynamic-cursor {
+    cursor: pointer;
+  }
+
+  .inErrorOutline {
+    outline: 1px solid theme.$support-error;
+    outline-offset: -1px;
+  }
+
+  .inErrorText {
+    color: theme.$support-error;
+  }
+
+  .cursor-default {
+    cursor: default;
+  }
+
+  .empty-state {
+    display: flex;
+    padding: $spacing-07 $spacing-07;
+
+    .empty-state__content {
+      text-align: left;
+      width: 100%;
+    }
+
+    .empty-state__icon {
+      display: flex;
+      margin-bottom: $spacing-06;
+      color: $icon-secondary;
+      opacity: 0.8;
+
+      svg {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    .empty-state__title {
+      @include type-style("heading-03");
+      margin-bottom: $spacing-04;
+      color: $text-primary;
+    }
+
+    .empty-state__description {
+      @include type-style("body-01");
+      color: $text-secondary;
+      margin: 0;
+    }
+  }
+}
+
+/* Tooltip icon button styling */
+.tooltip-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  color: theme.$icon-secondary;
+  transition: color 150ms ease-in-out;
+
+  &:hover {
+    color: theme.$icon-primary;
+  }
+
+  &:focus {
+    outline: 2px solid theme.$focus;
+    outline-offset: 2px;
+  }
+
+  svg {
+    vertical-align: middle;
+  }
+}
+
+/* Global loading overlay */
+.global-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  gap: 1rem;
+
+  .global-loading-message {
+    color: theme.$text-on-color;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+/* App initial loader - shown before app is ready */
+.app-initial-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: theme.$background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}

@@ -1,0 +1,144 @@
+// Markdown content styles with Carbon Design System
+.markdown-content {
+  padding: 0.5rem;
+
+  .markdown-code-block {
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .markdown-h1 {
+    font-size: 1.5rem;
+  }
+
+  .markdown-h2 {
+    font-size: 1.25rem;
+  }
+
+  .markdown-h3 {
+    font-size: 1.125rem;
+  }
+
+  .markdown-h4 {
+    font-size: 1rem;
+  }
+
+  .markdown-h5 {
+    font-size: 0.875rem;
+  }
+
+  .markdown-h6 {
+    font-size: 0.75rem;
+  }
+
+  // all containers
+  .markdown-paragraph {
+    margin-top: 0;
+    margin-bottom: $spacing-02;
+    align-items: center;
+  }
+
+  // Inline code
+  .markdown-inline-code {
+    background-color: theme.$layer-01;
+    color: theme.$text-primary;
+    font-family: "IBM Plex Mono", monospace;
+    line-height: 20px;
+    margin: 0.2rem;
+  }
+
+  // Code blocks wrapper
+  .markdown-code-block-wrapper {
+    position: relative;
+    margin: 0;
+
+    .markdown-code-actions {
+      position: absolute;
+      top: $spacing-02;
+      right: $spacing-02;
+      display: flex;
+      gap: $spacing-01;
+    }
+  }
+
+  // Code blocks
+  .markdown-code-block {
+    font-size: smaller;
+    border-radius: 4px;
+
+    .cds--snippet {
+      max-width: 100%;
+    }
+
+    .cds--snippet__overflow-indicator--left,
+    .cds--snippet__overflow-indicator--right {
+      display: none;
+    }
+
+    // Override CodeMirror font-size for markdown code blocks
+    .cm-editor {
+      .cm-scroller {
+        font-size: smaller !important; // Override the default 0.75rem from _editors.scss
+      }
+    }
+
+    pre {
+      font-family: "IBM Plex Mono", monospace;
+      white-space: pre;
+      overflow-x: auto;
+    }
+  }
+
+  // Lists
+  .markdown-list {
+    margin: $spacing-03 0;
+    padding-left: $spacing-06;
+    font-size: small;
+    line-height: 24px;
+
+    &--unordered {
+      list-style-type: disc;
+    }
+
+    &--ordered {
+      list-style-type: decimal;
+    }
+  }
+
+  .markdown-list-item::marker {
+    display: none;
+    content: "";
+  }
+
+  // Blockquotes
+  .markdown-blockquote {
+    margin: $spacing-04 0;
+    padding: $spacing-03 $spacing-05;
+    border-left: 4px solid theme.$border-subtle;
+    background-color: theme.$layer-01;
+    color: theme.$text-secondary;
+    font-style: italic;
+
+    .markdown-paragraph:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Tables
+  .markdown-table {
+    border: 1px solid theme.$border-subtle;
+    margin-bottom: 0.4rem;
+    margin-top: 0.4rem;
+  }
+
+  // Remove top margin from first element
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  // Remove bottom margin from last element
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}

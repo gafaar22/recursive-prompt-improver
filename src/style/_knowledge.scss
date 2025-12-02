@@ -1,0 +1,156 @@
+// Knowledge page and search modal styles
+@use "@carbon/react/scss/theme" as theme;
+@use "@carbon/layout" as layout;
+
+/* Knowledge page file list styles */
+.knowledge-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: layout.$spacing-03;
+}
+
+.knowledge-file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: layout.$spacing-03 layout.$spacing-04;
+  background-color: theme.$layer-02;
+  border-radius: 4px;
+}
+
+.knowledge-file-info {
+  display: flex;
+  align-items: center;
+  gap: layout.$spacing-03;
+}
+
+.knowledge-file-name {
+  font-size: 0.875rem;
+  color: theme.$text-primary;
+}
+
+.knowledge-file-size {
+  font-size: 0.75rem;
+  color: theme.$text-secondary;
+  margin-left: layout.$spacing-03;
+  margin-right: layout.$spacing-03;
+}
+
+.knowledge-file-actions {
+  display: flex;
+  align-items: center;
+  gap: layout.$spacing-02;
+}
+
+.knowledge-description {
+  font-size: 0.875rem;
+  color: theme.$text-secondary;
+  margin-bottom: 1rem;
+  max-width: 70vh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.knowledge-no-files {
+  font-size: 0.875rem;
+  color: theme.$text-secondary;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+/* Knowledge search modal styles */
+.knowledge-search-modal.cds--modal-content {
+  min-height: 60vh;
+}
+
+.knowledge-search-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: layout.$spacing-04;
+  margin-bottom: layout.$spacing-05;
+
+  .cds--text-input-wrapper {
+    flex: 1;
+  }
+
+  .cds--dropdown__wrapper {
+    min-width: 150px;
+  }
+}
+
+.knowledge-search-button {
+  min-width: 100px;
+}
+
+.knowledge-search-loading {
+  display: flex;
+  justify-content: center;
+  padding: layout.$spacing-05;
+}
+
+.knowledge-search-hint {
+  color: theme.$text-secondary;
+  font-style: italic;
+  margin-top: 10vh;
+}
+
+.knowledge-search-results {
+  margin-top: layout.$spacing-05;
+}
+
+.knowledge-search-results-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: layout.$spacing-04;
+  color: theme.$text-primary;
+}
+
+.knowledge-search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: layout.$spacing-04;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.knowledge-search-result {
+  background-color: theme.$layer-02;
+  padding: layout.$spacing-04;
+  border-left: 3px solid theme.$border-strong;
+}
+
+.knowledge-search-result-header {
+  display: flex;
+  align-items: center;
+  gap: layout.$spacing-03;
+  margin-bottom: layout.$spacing-03;
+}
+
+.knowledge-search-result-rank {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: theme.$text-secondary;
+  min-width: 24px;
+}
+
+.knowledge-search-result-file {
+  font-size: 0.75rem;
+  color: theme.$link-primary;
+  flex: 1;
+}
+
+.knowledge-search-result-score {
+  font-size: 0.75rem;
+  color: theme.$support-success;
+  font-weight: 500;
+}
+
+.knowledge-search-result-text {
+  font-size: 0.75rem;
+  color: theme.$text-primary;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  // max-height: 150px;
+  overflow-y: auto;
+}

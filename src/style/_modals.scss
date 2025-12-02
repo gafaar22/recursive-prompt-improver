@@ -1,0 +1,512 @@
+// Modal styles and session details modal
+.rpi {
+  .session-details-modal .cds--modal-container {
+    height: 90vh;
+    width: 90vw;
+
+    .testAccordionItem .cds--accordion__wrapper {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+  // Provider modal - Custom models section
+  .custom-models-section {
+    margin-top: 1rem;
+    background-color: theme.$layer-01;
+    border-radius: 4px;
+
+    .custom-models-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+
+      .custom-models-title {
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: theme.$text-primary;
+      }
+    }
+
+    .custom-models-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .custom-model-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      background-color: theme.$layer-02;
+      border-radius: 4px;
+
+      .custom-model-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        .custom-model-name {
+          font-weight: 500;
+          color: theme.$text-primary;
+        }
+
+        .custom-model-id {
+          font-size: 0.75rem;
+          color: theme.$text-secondary;
+        }
+
+        .custom-model-tags {
+          display: flex;
+          gap: 0.25rem;
+          margin-left: 0.5rem;
+        }
+      }
+
+      .custom-model-actions {
+        display: flex;
+        gap: 0.25rem;
+      }
+    }
+
+    .custom-models-empty {
+      font-size: 0.75rem;
+      color: theme.$text-secondary;
+      opacity: 0.5;
+      margin: 0;
+      padding: 0.5rem 0;
+    }
+  }
+
+  // Agent modal styles
+  .agent-modal {
+    .agent-name-model-row {
+      display: flex;
+      gap: 1rem;
+      align-items: start;
+
+      > div {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+
+    .cds--modal-container {
+      min-height: calc(100vh - 10.5rem);
+    }
+
+    .agent-tools-json-row {
+      display: flex;
+      gap: 2rem;
+      align-items: end;
+
+      .agent-tools-multiselect {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .agent-json-toggle {
+        flex-shrink: 0;
+        min-width: 100px;
+        padding-bottom: 10px;
+      }
+    }
+
+    .agent-json-schema-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+
+      .agent-json-toggle {
+        flex-shrink: 0;
+      }
+
+      .agent-json-strict-toggle {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+  }
+
+  .cds--g100 .diff-container.dark-theme {
+    --addedBackground: rgba(theme.$support-success, 0.4);
+    --removedBackground: rgba(theme.$support-error, 0.35);
+  }
+
+  .diff-container.dark-theme > tbody .line {
+    display: flex;
+  }
+
+  .diff-container.dark-theme > tbody .line:nth-child(1) {
+    padding: layout.$spacing-04;
+    display: flex;
+    border-top: 0;
+  }
+
+  // Upload modal styles
+  .upload-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .upload-modal-description {
+      color: theme.$text-secondary;
+      font-size: 0.875rem;
+      margin: 0;
+    }
+
+    .upload-modal-subdescription {
+      color: theme.$text-secondary;
+      font-size: 0.75rem;
+      font-style: italic;
+      margin: -0.5rem 0 0 0;
+    }
+
+    .upload-modal-info {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      .upload-modal-label {
+        color: theme.$text-secondary;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+        padding-top: 0.25rem;
+      }
+
+      .upload-modal-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+      }
+    }
+
+    .upload-modal-size-limit,
+    .upload-modal-mode {
+      color: theme.$text-secondary;
+      font-size: 0.75rem;
+      margin: 0;
+    }
+
+    .upload-modal-file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      max-height: 200px;
+      overflow-y: auto;
+
+      .cds--file__selected-file {
+        max-inline-size: inherit;
+      }
+
+      .upload-modal-file-icon {
+        margin-right: 0.5rem;
+      }
+
+      .upload-modal-file-size {
+        color: theme.$text-secondary;
+        font-size: 0.75rem;
+        margin-left: auto;
+      }
+    }
+
+    .upload-modal-progress {
+      margin-top: 1rem;
+
+      .upload-modal-stage,
+      .upload-modal-page-progress {
+        color: theme.$text-secondary;
+        font-size: 0.75rem;
+        margin: 0.5rem 0 0 0;
+      }
+    }
+
+    // Carbon FileUploader overrides
+    .cds--file__drop-container {
+      min-height: 120px;
+      min-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  // Welcome modal styles
+  .welcome-modal {
+    .cds--modal-container {
+      width: 95vw;
+      max-width: 95vw;
+      height: 90vh;
+      max-height: 90vh;
+    }
+
+    .cds--modal-content {
+      height: calc(90vh - 3rem);
+      padding: 0;
+      overflow-y: auto;
+    }
+
+    .cds--modal-header {
+      display: none;
+    }
+
+    .welcome-modal__body {
+      min-height: 100%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .welcome-modal__animation {
+      height: calc(100vh - 400px);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > * {
+        flex: 0 1 auto;
+        flex-basis: 100%;
+        overflow: hidden;
+        display: contents;
+      }
+
+      // Ollama-specific animation styles
+      &--ollama_check,
+      &--ollama_found,
+      &--ollama_setup {
+        > * {
+          flex-basis: 70%;
+        }
+      }
+
+      &--lmstudio_check,
+      &--lmstudio_found,
+      &--lmstudio_setup {
+        > * {
+          flex-basis: 65%;
+        }
+      }
+    }
+
+    .welcome-modal__options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .welcome-modal__message {
+      font-size: 1.125rem;
+      color: theme.$text-primary;
+      text-align: center;
+      margin: 0;
+    }
+
+    .welcome-modal__buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .welcome-modal__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    // Fade animations for step transitions
+    .fade-in {
+      animation: welcomeFadeIn 0.3s ease-in-out forwards;
+    }
+
+    .fade-out {
+      animation: welcomeFadeOut 0.3s ease-in-out forwards;
+    }
+
+    @keyframes welcomeFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes welcomeFadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+
+    // Fly away animation for the complete step
+    .fly-away {
+      animation: flyAway 1.4s ease-in forwards;
+    }
+
+    // Button fade out during exit
+    .welcome-modal__content.fly-away {
+      animation: buttonFadeOut 0.4s ease-out forwards;
+    }
+
+    @keyframes flyAway {
+      0% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(100vw) translateY(-50vh) scale(0.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes buttonFadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  }
+
+  // Context modal - message editor with image support
+  .context-message-image-btn {
+    flex-shrink: 0;
+    align-self: flex-end;
+  }
+
+  .context-message-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .context-message-image-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .context-message-image-preview {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid theme.$border-subtle-01;
+    cursor: pointer;
+
+    &:hover {
+      border-color: theme.$focus;
+    }
+  }
+
+  .context-message-image-remove {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    transition: opacity 0.15s ease;
+    background-color: theme.$text-primary !important;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  // Test settings modal - images section
+  .test-settings-images-section {
+    .test-settings-images-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+
+      .cds--label {
+        margin-bottom: 0;
+      }
+    }
+
+    .test-settings-images-container {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .test-settings-image-btn {
+      flex-shrink: 0;
+    }
+  }
+
+  .test-settings-images-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.1rem;
+    padding-top: 0.4rem;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  .test-settings-image-wrapper {
+    position: relative;
+    display: inline-block;
+
+    &:hover .test-settings-image-remove {
+      opacity: 1;
+    }
+  }
+
+  .test-settings-image-preview {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid theme.$border-subtle-01;
+    cursor: pointer;
+
+    &:hover {
+      border-color: theme.$focus;
+    }
+  }
+
+  .test-settings-image-remove {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    transition: opacity 0.15s ease;
+    color: theme.$text-inverse;
+    background-color: theme.$text-primary !important;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      fill: theme.$text-inverse;
+    }
+  }
+}

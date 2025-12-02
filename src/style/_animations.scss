@@ -1,0 +1,492 @@
+// Animation utilities and helper classes
+
+// Keyframe Animations
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes flash {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes flip-horizontal {
+  0% {
+    transform: rotateY(0);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes flip-vertical {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(360deg);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes swing {
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.15);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.15);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+// Animation helper classes
+.rpi {
+  // Base animation class
+  .animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+
+  // Animation speed modifiers
+  .animated-fast {
+    animation-duration: 0.5s;
+  }
+
+  .animated-slow {
+    animation-duration: 2s;
+  }
+
+  .animated-slower {
+    animation-duration: 3s;
+  }
+
+  // Animation delay modifiers
+  .animated-delay-1s {
+    animation-delay: 1s;
+  }
+
+  .animated-delay-2s {
+    animation-delay: 2s;
+  }
+
+  .animated-delay-3s {
+    animation-delay: 3s;
+  }
+
+  // Infinite animation
+  .animated-infinite {
+    animation-iteration-count: infinite;
+  }
+
+  // Animation classes
+  .animate-pulse {
+    animation-name: pulse;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+  }
+
+  .animate-bounce {
+    animation-name: bounce;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+  }
+
+  .animate-flash {
+    animation-name: flash;
+    animation-duration: 1s;
+  }
+
+  .animate-rotate {
+    animation-name: rotate;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+  }
+
+  .animate-rotate-reverse {
+    animation-name: rotate-reverse;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+  }
+
+  .animate-flip-horizontal {
+    animation-name: flip-horizontal;
+    animation-duration: 1s;
+    transform-style: preserve-3d;
+  }
+
+  .animate-flip-vertical {
+    animation-name: flip-vertical;
+    animation-duration: 1s;
+    transform-style: preserve-3d;
+  }
+
+  .animate-shake {
+    animation-name: shake;
+    animation-duration: 0.5s;
+  }
+
+  .animate-swing {
+    animation-name: swing;
+    animation-duration: 1s;
+    transform-origin: top center;
+  }
+
+  .animate-fade-in {
+    animation-name: fade-in;
+    animation-duration: 0.5s;
+  }
+
+  .animate-fade-out {
+    animation-name: fade-out;
+    animation-duration: 0.5s;
+  }
+
+  .animate-slide-in-left {
+    animation-name: slide-in-left;
+    animation-duration: 0.5s;
+  }
+
+  .animate-slide-in-right {
+    animation-name: slide-in-right;
+    animation-duration: 0.5s;
+  }
+
+  .animate-slide-in-up {
+    animation-name: slide-in-up;
+    animation-duration: 0.5s;
+  }
+
+  .animate-slide-in-down {
+    animation-name: slide-in-down;
+    animation-duration: 0.5s;
+  }
+
+  .animate-zoom-in {
+    animation-name: zoom-in;
+    animation-duration: 0.5s;
+  }
+
+  .animate-zoom-out {
+    animation-name: zoom-out;
+    animation-duration: 0.5s;
+  }
+
+  .animate-wiggle {
+    animation-name: wiggle;
+    animation-duration: 0.8s;
+  }
+
+  .animate-heartbeat {
+    animation-name: heartbeat;
+    animation-duration: 1.3s;
+    animation-timing-function: ease-in-out;
+  }
+
+  // Hover animations - only animate on hover
+  .animate-pulse-hover:hover {
+    animation: pulse 1.5s ease-in-out;
+  }
+
+  .animate-bounce-hover:hover {
+    animation: bounce 1s cubic-bezier(0.28, 0.84, 0.42, 1);
+  }
+
+  .animate-rotate-hover:hover {
+    animation: rotate 2s linear;
+  }
+
+  .animate-shake-hover:hover {
+    animation: shake 0.5s;
+  }
+
+  .animate-wiggle-hover:hover {
+    animation: wiggle 0.8s;
+  }
+
+  .animate-flip-horizontal-hover:hover {
+    animation: flip-horizontal 1s;
+    transform-style: preserve-3d;
+  }
+
+  .animate-flip-vertical-hover:hover {
+    animation: flip-vertical 1s;
+    transform-style: preserve-3d;
+  }
+
+  // Button-specific animations
+  .button-pulse {
+    &:hover:not(:disabled) {
+      animation: pulse 0.8s ease-in-out;
+    }
+  }
+
+  .button-bounce {
+    &:active:not(:disabled) {
+      animation: bounce 0.5s cubic-bezier(0.28, 0.84, 0.42, 1);
+    }
+  }
+
+  .button-shake {
+    &:hover:not(:disabled) {
+      animation: shake 0.5s;
+    }
+  }
+
+  // Icon-specific animations
+  .icon-rotate {
+    animation: rotate 2s linear infinite;
+  }
+
+  .icon-pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .icon-bounce {
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .icon-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+  }
+
+  .icon-heartbeat {
+    animation: heartbeat 1.3s ease-in-out infinite;
+  }
+
+  // Hover effect for icons
+  .icon-hover-rotate:hover {
+    animation: rotate 0.6s linear;
+  }
+
+  .icon-hover-bounce:hover {
+    animation: bounce 0.5s cubic-bezier(0.28, 0.84, 0.42, 1);
+  }
+
+  .icon-hover-pulse:hover {
+    animation: pulse 0.8s ease-in-out;
+  }
+
+  .icon-hover-shake:hover {
+    animation: shake 0.5s;
+  }
+
+  .icon-hover-wiggle:hover {
+    animation: wiggle 0.6s;
+  }
+
+  // Loading spinner animation
+  .loading-spinner {
+    animation: rotate 1s linear infinite;
+    display: inline-block;
+  }
+
+  // Attention seekers
+  .attention-pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  .attention-flash {
+    animation: flash 2s ease-in-out infinite;
+  }
+
+  .attention-shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 3;
+  }
+
+  .attention-heartbeat {
+    animation: heartbeat 1.3s ease-in-out infinite;
+  }
+}
