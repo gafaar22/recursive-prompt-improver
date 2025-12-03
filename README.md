@@ -437,19 +437,27 @@ The application is built with:
 - **Routing**: React Router DOM (HashRouter for Electron compatibility)
 - **State Management**: React Context API for global state
 - **Storage**: Pluggable storage backend (localStorage or IndexedDB)
-- **API Integration**: IBM WatsonX API for LLM and embeddings
+- **API Integration**: Multi-provider LLM support (Azure OpenAI, ChatGPT, Anthropic, Gemini, Grok, Groq, HuggingFace, LM Studio, Mistral, Ollama, OpenAI Compatible, Perplexity, WatsonX)
+- **MCP Integration**: Model Context Protocol SDK for external tool connections
+- **RAG Support**: Transformers.js for local embeddings and vector search
 - **Build Tools**: Webpack with custom configuration
-- **Code Quality**: ESLint for linting
+- **Code Quality**: ESLint and Prettier for linting and formatting
 
 ### Key Technologies
 
 - **React 19**: Latest React features including concurrent rendering
+- **Electron**: Cross-platform desktop application framework
 - **Carbon Components**: Comprehensive UI component library from IBM
 - **Electron Builder**: Package application for Windows, macOS, and Linux
 - **CodeMirror**: Full-featured code editor for tool function editing
+- **Transformers.js**: Local embeddings for RAG and semantic similarity
+- **MCP Client SDK**: Model Context Protocol integration for external tools
 - **Ajv**: JSON Schema validation for output verification
 - **Moment.js**: Date and time formatting
 - **React Diff Viewer**: Visual diff comparison for improved prompts
 - **ECharts**: Data visualization for session analytics
+- **PDF.js**: PDF document processing and rendering
+- **Tesseract.js**: OCR for scanned document text extraction
+- **js-tiktoken**: Token counting for LLM context management
 - **JSON Repair**: Robust JSON parsing and repair utilities
 - **Web Speech API**: Browser-native speech recognition for voice input
