@@ -130,14 +130,13 @@ function createWindow() {
     });
   });
 
-  // Enable localStorage and session persistence
+  // Clear only cache-related storage, keeping user data (localStorage & indexeddb) intact
   win.webContents.session
     .clearStorageData({
-      storages: ["appcache", "serviceworkers", "cachestorage", "websql", "indexdb"],
-      quotas: ["temporary", "persistent", "syncable"],
+      storages: ["appcache", "serviceworkers", "cachestorage"],
     })
     .then(() => {
-      console.log("Storage cleared and ready for use");
+      console.log("Cache storage cleared, user data preserved");
     });
 
   const devUrl = "http://localhost:3000";
