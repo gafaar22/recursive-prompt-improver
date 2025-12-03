@@ -126,7 +126,7 @@ const FormComponent = () => {
               handleTestSettingsChange(
                 idx,
                 "checkTypes",
-                formData.inOutPairs[idx].settings.checkTypes.filter((c) => c !== checkTypeId),
+                formData.inOutPairs[idx].settings.checkTypes.filter((c) => c !== checkTypeId)
               )
             }
             onRemoveJsonSchema={(idx) => handleTestSettingsChange(idx, "useJsonSchema", false)}
@@ -198,7 +198,7 @@ const FormComponent = () => {
         coreModel={formData.coreModel}
         defaultEmbeddingModel={getDefaultEmbeddingModel(
           settings.providers,
-          settings.defaultProviderId,
+          settings.defaultProviderId
         )}
         selectedContext={
           selectedTestIdx !== null ? formData.inOutPairs[selectedTestIdx]?.settings?.context : null

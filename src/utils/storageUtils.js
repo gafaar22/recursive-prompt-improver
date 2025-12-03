@@ -235,7 +235,7 @@ export const saveToLocalStorage = async (data) => {
         improveMode: data.improveMode !== undefined ? data.improveMode : true,
         selectedTools: data.selectedTools || [],
         chatMessages: data.chatMessages || [],
-      }),
+      })
     );
   } catch (error) {
     console.error("Error saving to storage:", error);
@@ -499,7 +499,7 @@ export const loadSessionIntoForm = async (session) => {
         // If this pair has a context, try to recover it
         if (pair.settings?.context) {
           const matchingContext = existingContexts.find(
-            (context) => context.id === pair.settings.context.id,
+            (context) => context.id === pair.settings.context.id
           );
 
           if (matchingContext) {
@@ -554,7 +554,7 @@ export const loadSessionIntoForm = async (session) => {
             toolsCalled: pair.settings?.toolsCalled || [],
           },
         };
-      }),
+      })
     );
 
     // Process selected tools - check if they exist and are identical
@@ -591,7 +591,7 @@ export const loadSessionIntoForm = async (session) => {
         // Save and use the recovered tool
         const updatedTools = await saveTool(recoveredTool);
         return updatedTools[0];
-      }),
+      })
     );
 
     const formData = {
@@ -741,7 +741,7 @@ export const saveContext = async (context) => {
     // Check if a context with the same instructionHash exists (highest priority)
     if (context.instructionHash) {
       const existingContextByHash = existingContexts.find(
-        (c) => c.instructionHash === context.instructionHash,
+        (c) => c.instructionHash === context.instructionHash
       );
 
       if (existingContextByHash) {
@@ -1279,7 +1279,7 @@ export const saveSettings = async (settings) => {
     await storage.setItem(STORAGE_KEYS.MAX_TOOL_ITERATIONS, settings.maxToolIterations.toString());
     await storage.setItem(
       STORAGE_KEYS.ENVIRONMENT_VARIABLES,
-      JSON.stringify(settings.environmentVariables || []),
+      JSON.stringify(settings.environmentVariables || [])
     );
 
     // Update form data's coreModel when default provider/model changes
@@ -1403,7 +1403,7 @@ export const saveTool = async (tool) => {
 
           // Update in selectedTools
           const updatedSelectedTools = (formData.selectedTools || []).map((t) =>
-            t.id === tool.id ? updatedTool : t,
+            t.id === tool.id ? updatedTool : t
           );
           if (JSON.stringify(updatedSelectedTools) !== JSON.stringify(formData.selectedTools)) {
             formData.selectedTools = updatedSelectedTools;
@@ -1414,7 +1414,7 @@ export const saveTool = async (tool) => {
           const updatedPairs = formData.inOutPairs.map((pair) => {
             if (pair.settings?.toolsCalled?.length > 0) {
               const updatedToolsCalled = pair.settings.toolsCalled.map((t) =>
-                t.id === tool.id ? updatedTool : t,
+                t.id === tool.id ? updatedTool : t
               );
               if (
                 JSON.stringify(updatedToolsCalled) !== JSON.stringify(pair.settings.toolsCalled)
@@ -1600,7 +1600,7 @@ export const deleteTool = async (id) => {
                 updatedCheckTypes.includes(CHECK_TYPES.TOOLS_CALL.id)
               ) {
                 updatedCheckTypes = updatedCheckTypes.filter(
-                  (ct) => ct !== CHECK_TYPES.TOOLS_CALL.id,
+                  (ct) => ct !== CHECK_TYPES.TOOLS_CALL.id
                 );
               }
 
@@ -1691,7 +1691,7 @@ export const clearAllTools = async () => {
             let updatedCheckTypes = pair.settings.checkTypes;
             if (updatedCheckTypes.includes(CHECK_TYPES.TOOLS_CALL.id)) {
               updatedCheckTypes = updatedCheckTypes.filter(
-                (ct) => ct !== CHECK_TYPES.TOOLS_CALL.id,
+                (ct) => ct !== CHECK_TYPES.TOOLS_CALL.id
               );
             }
 
@@ -1799,7 +1799,7 @@ export const saveAgent = async (agent) => {
         const formData = await loadFromLocalStorage();
         if (formData && formData.selectedTools?.length > 0) {
           const updatedSelectedTools = formData.selectedTools.map((tool) =>
-            tool.id === agent.id && tool.isAgent ? updatedAgent : tool,
+            tool.id === agent.id && tool.isAgent ? updatedAgent : tool
           );
           if (JSON.stringify(updatedSelectedTools) !== JSON.stringify(formData.selectedTools)) {
             formData.selectedTools = updatedSelectedTools;
@@ -1860,7 +1860,7 @@ export const deleteAgent = async (id) => {
     const formData = await loadFromLocalStorage();
     if (formData && formData.selectedTools?.length > 0) {
       const updatedSelectedTools = formData.selectedTools.filter(
-        (tool) => !(tool.id === id && tool.isAgent),
+        (tool) => !(tool.id === id && tool.isAgent)
       );
       if (updatedSelectedTools.length !== formData.selectedTools.length) {
         formData.selectedTools = updatedSelectedTools;
@@ -2113,7 +2113,7 @@ export const updateSessionsOnAgentUpdate = async (updatedAgent) => {
                     type: t.type || "function", // Preserve type
                     description: `(Agent) ${updatedAgent.description || updatedAgent.instructions}`, // Update description
                   }
-                : t,
+                : t
             ),
           };
         }
@@ -2313,7 +2313,7 @@ export const updateChatMessagesOnAgentRename = async (oldAgentName, newAgentName
 export const updateContextsOnToolRename = async (oldToolName, newToolName) => {
   try {
     console.log(
-      `[updateContextsOnToolRename] Updating tool name from "${oldToolName}" to "${newToolName}"`,
+      `[updateContextsOnToolRename] Updating tool name from "${oldToolName}" to "${newToolName}"`
     );
     const contexts = await loadContexts();
     if (contexts && contexts.length > 0) {
@@ -2323,7 +2323,7 @@ export const updateContextsOnToolRename = async (oldToolName, newToolName) => {
           const updatedMessages = context.messages.map((msg) => {
             if (msg.toolName === oldToolName) {
               console.log(
-                `[updateContextsOnToolRename] Found match in context "${context.name}", message role: ${msg.role}`,
+                `[updateContextsOnToolRename] Found match in context "${context.name}", message role: ${msg.role}`
               );
               contextsUpdated = true;
               return {
@@ -2346,7 +2346,7 @@ export const updateContextsOnToolRename = async (oldToolName, newToolName) => {
 
       if (contextsUpdated) {
         console.log(
-          `[updateContextsOnToolRename] Saving ${updatedContexts.length} updated contexts`,
+          `[updateContextsOnToolRename] Saving ${updatedContexts.length} updated contexts`
         );
         await saveContexts(updatedContexts);
       } else {
@@ -2367,7 +2367,7 @@ export const updateContextsOnToolRename = async (oldToolName, newToolName) => {
 export const updateContextsOnAgentRename = async (oldAgentName, newAgentName) => {
   try {
     console.log(
-      `[updateContextsOnAgentRename] Updating agent name from "${oldAgentName}" to "${newAgentName}"`,
+      `[updateContextsOnAgentRename] Updating agent name from "${oldAgentName}" to "${newAgentName}"`
     );
     const contexts = await loadContexts();
     if (contexts && contexts.length > 0) {
@@ -2377,7 +2377,7 @@ export const updateContextsOnAgentRename = async (oldAgentName, newAgentName) =>
           const updatedMessages = context.messages.map((msg) => {
             if (msg.toolName === oldAgentName) {
               console.log(
-                `[updateContextsOnAgentRename] Found match in context "${context.name}", message role: ${msg.role}`,
+                `[updateContextsOnAgentRename] Found match in context "${context.name}", message role: ${msg.role}`
               );
               contextsUpdated = true;
               return {
@@ -2400,7 +2400,7 @@ export const updateContextsOnAgentRename = async (oldAgentName, newAgentName) =>
 
       if (contextsUpdated) {
         console.log(
-          `[updateContextsOnAgentRename] Saving ${updatedContexts.length} updated contexts`,
+          `[updateContextsOnAgentRename] Saving ${updatedContexts.length} updated contexts`
         );
         await saveContexts(updatedContexts);
       } else {

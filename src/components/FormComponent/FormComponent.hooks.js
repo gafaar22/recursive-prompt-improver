@@ -84,7 +84,7 @@ export const useFormComponent = () => {
   const [previousInstructions, setPreviousInstructions] = useState(null);
   const [improvedInstructions, setImprovedInstructions] = useState(null);
   const [formData, setFormData] = useState(
-    getInitialFormData(settings.providers, settings.defaultProviderId),
+    getInitialFormData(settings.providers, settings.defaultProviderId)
   );
 
   const allAvailableModels = getAllAvailableModels(settings.providers);
@@ -360,7 +360,7 @@ export const useFormComponent = () => {
             isGenerating
               ? "System prompt generated based on your description"
               : "System prompt improved based on your feedback",
-            4000,
+            4000
           );
         }
       } catch (error) {
@@ -371,7 +371,7 @@ export const useFormComponent = () => {
         if (error.name === "AbortError") {
           showError(
             "Operation stopped",
-            isGenerating ? "Generation has been aborted" : "Improving has been aborted",
+            isGenerating ? "Generation has been aborted" : "Improving has been aborted"
           );
         } else {
           const errorMessage =
@@ -485,7 +485,7 @@ export const useFormComponent = () => {
       logger(
         `🏁 END - ${
           isImproveDisabled(formData.improveMode) ? "Testing" : `${formData.iterations} iterations`
-        } - ✅ Completed successfully in ${executionTime} seconds`,
+        } - ✅ Completed successfully in ${executionTime} seconds`
       );
 
       showSuccess(
@@ -495,7 +495,7 @@ export const useFormComponent = () => {
         } in ${executionTime} seconds`,
         8000,
         "/sessions",
-        "Click to view in sessions",
+        "Click to view in sessions"
       );
     } catch (error) {
       console.log(error);
@@ -533,7 +533,7 @@ export const useFormComponent = () => {
           formData.instructions,
           lastSession.instructions,
           formData.selectedTools,
-          lastSession.selectedTools,
+          lastSession.selectedTools
         )
       ) {
         const currentCheckTypes = currentPair.settings?.checkTypes || DEFAULT_CHECK_TYPES;
@@ -564,7 +564,7 @@ export const useFormComponent = () => {
       saveToLocalStorage(formData);
     },
     500,
-    [JSON.stringify(formData)],
+    [JSON.stringify(formData)]
   );
 
   useEffect(() => {
@@ -614,7 +614,7 @@ export const useFormComponent = () => {
     if (settings.providers && settings.providers.length > 0) {
       const newDefaultModel = getDefaultModel(settings.providers, settings.defaultProviderId);
       const isCurrentModelValid = allAvailableModels.some(
-        (m) => m.id === formData.coreModel?.id && m.providerId === formData.coreModel?.providerId,
+        (m) => m.id === formData.coreModel?.id && m.providerId === formData.coreModel?.providerId
       );
 
       if (!isCurrentModelValid) {
@@ -661,7 +661,7 @@ export const useFormComponent = () => {
               model: formatModelWithProvider(pair.settings?.model, settings.providers),
               embeddingModel: formatModelWithProvider(
                 pair.settings?.embeddingModel,
-                settings.providers,
+                settings.providers
               ),
               useJsonSchema: pair.settings?.useJsonSchema || false,
               jsonSchema: pair.settings?.jsonSchema || "",
@@ -676,7 +676,7 @@ export const useFormComponent = () => {
             savedData.coreModel ||
               savedData.selectedModel ||
               getDefaultModel(settings.providers, settings.defaultProviderId),
-            settings.providers,
+            settings.providers
           ),
           improveMode: savedData.improveMode !== undefined ? savedData.improveMode : true,
           selectedTools: savedData.selectedTools || [],

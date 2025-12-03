@@ -199,7 +199,7 @@ export const findAffectedTestsByToolRemoval = (inOutPairs, removedTools) => {
   inOutPairs.forEach((pair, index) => {
     if (pair.settings?.toolsCalled?.length > 0) {
       const usesRemovedTool = pair.settings.toolsCalled.some((tool) =>
-        removedTools.some((removed) => removed.id === tool.id),
+        removedTools.some((removed) => removed.id === tool.id)
       );
       if (usesRemovedTool) {
         affectedTests.push(index + 1);
@@ -217,7 +217,7 @@ export const updateTestPairsRemovingTools = (inOutPairs, removedTools) => {
     if (pair.settings?.toolsCalled?.length > 0) {
       // Remove the tools from toolsCalled
       const updatedToolsCalled = pair.settings.toolsCalled.filter(
-        (tool) => !removedTools.some((removed) => removed.id === tool.id),
+        (tool) => !removedTools.some((removed) => removed.id === tool.id)
       );
 
       // If no tools left in toolsCalled, remove the TOOLS_CALL check type
@@ -304,7 +304,7 @@ export const doesLastSessionMatch = (
   formInstructions,
   lastSessionInstructions,
   currentTools,
-  lastSessionTools,
+  lastSessionTools
 ) => {
   if (!currentPair || !lastSessionPair || !lastSessionTest) return false;
 

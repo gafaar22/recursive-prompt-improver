@@ -82,7 +82,7 @@ const ChatMessage = ({
               · {images.length} image{images.length > 1 ? "s" : ""}
             </span>
           )}
-          {avgTokens !== undefined && avgTokens !== null && (
+          {!!avgTokens && (
             <span className="chat-message__tokens"> · {avgTokens.toLocaleString()} tokens</span>
           )}
         </div>
