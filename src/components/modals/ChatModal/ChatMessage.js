@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ROLES } from "@utils/constants";
-import { Tile, IconButton } from "@carbon/react";
-import { Copy, Cut, Restart } from "@carbon/icons-react";
+import { Tile, IconButton, Button } from "@carbon/react";
+import { Copy, Cut, Restart, ChevronDown, ChevronUp } from "@carbon/icons-react";
 import MarkdownContent from "@components/shared/MarkdownContent";
 import { openHtmlPreview } from "@utils/internalBrowser";
 
@@ -23,6 +23,19 @@ const ChatMessage = ({
   const isUser = role === ROLES.USER;
   const isTool = role === ROLES.TOOL;
   const isAssistant = role === ROLES.ASSISTANT;
+
+  // State for tool message expand/collapse
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [needsExpand, setNeedsExpand] = useState(false);
+  const toolContentRef = useRef(null);
+
+  // Check if tool content exceeds max height
+  useEffect(() => {
+    if (isTool && toolContentRef.current) {
+      const maxHeight = 150; // matches CSS max-height
+      setNeedsExpand(toolContentRef.current.scrollHeight > maxHeight);
+    }
+  }, [isTool, content]);
 
   // Handle image preview click
   const handleImageClick = (image, idx) => {
@@ -91,7 +104,27 @@ const ChatMessage = ({
                 ))}
             </div>
           )}
-          {isUser || (isAssistant && toolCalls?.length > 0) ? (
+          {isTool ? (
+            <div className="chat-message__tool-content-wrapper">
+              <div
+                ref={toolContentRef}
+                className={`chat-message__tool-content ${isExpanded ? "chat-message__tool-content--expanded" : ""}`}
+              >
+                <MarkdownContent content={content || "_No content_"} />
+              </div>
+              {needsExpand && (
+                <Button
+                  kind="ghost"
+                  size="sm"
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="chat-message__expand-button"
+                  renderIcon={isExpanded ? ChevronUp : ChevronDown}
+                >
+                  {isExpanded ? "Collapse" : "See more"}
+                </Button>
+              )}
+            </div>
+          ) : isUser || (isAssistant && toolCalls?.length > 0) ? (
             content
           ) : (
             <MarkdownContent content={content || "_No content_"} />

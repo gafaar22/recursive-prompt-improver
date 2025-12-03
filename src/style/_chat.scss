@@ -282,6 +282,26 @@
     overflow: auto;
   }
 
+  &__tool-content-wrapper {
+    position: relative;
+  }
+
+  &__tool-content {
+    max-height: 150px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+
+    &--expanded {
+      max-height: none;
+    }
+  }
+
+  &__expand-button {
+    margin-top: $spacing-02;
+    margin-left: $spacing-03;
+    min-height: 24px;
+  }
+
   &__tool-calls-header {
     font-size: 0.75rem;
     font-weight: 600;
