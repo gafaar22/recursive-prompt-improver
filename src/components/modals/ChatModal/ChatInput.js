@@ -25,7 +25,7 @@ const ChatInput = ({
 
   // Handle external message updates (e.g., from "Copy to input" button)
   useEffect(() => {
-    if (externalMessage !== undefined && externalMessage !== null) {
+    if (externalMessage != null) {
       setMessage(externalMessage);
       setHistoryIndex(-1);
       // Focus the textarea and clear the external message

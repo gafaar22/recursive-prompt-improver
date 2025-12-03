@@ -44,6 +44,8 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
   const [showMediaUploadModal, setShowMediaUploadModal] = useState(false);
   // External message state for "Copy to input" action
   const [externalMessage, setExternalMessage] = useState(null);
+  // Pending retry state for "Retry" action on last message
+  const [pendingRetry, setPendingRetry] = useState(null);
 
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
@@ -537,10 +539,8 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         // Remove the user message and all following non-user messages
         const newMessages = messages.slice(0, messageIndex);
         setMessages(newMessages);
-        // Resend the message
-        setTimeout(() => {
-          handleSendMessage(content, images || []);
-        }, 100);
+        // Set pending retry to be executed after state update
+        setPendingRetry({ content, images: images || [] });
       } else {
         // For non-last messages, just send a copy without modifying the conversation
         handleSendMessage(content, images || []);
@@ -686,6 +686,15 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
     addTokensIfMissing();
   }, [isLoading, messages, addTokensToMessages]);
 
+  // Handle pending retry after messages state update
+  useEffect(() => {
+    if (pendingRetry && !isLoading) {
+      const { content, images } = pendingRetry;
+      setPendingRetry(null);
+      handleSendMessage(content, images);
+    }
+  }, [pendingRetry, isLoading, handleSendMessage]);
+
   // Calculate total tokens for the entire conversation
   const totalTokens = useMemo(() => {
     return messages.reduce((sum, msg) => sum + (msg.avgTokens || 0), 0);
@@ -701,6 +710,11 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
   const supportsVision = useMemo(() => {
     return formData?.coreModel?.supportsVision === true;
   }, [formData?.coreModel]);
+
+  // Memoize the last user message index calculation
+  const lastUserMessageIndex = useMemo(() => {
+    return messages.reduceRight((acc, m, i) => (acc === -1 && m.role === ROLES.USER ? i : acc), -1);
+  }, [messages]);
 
   // Handle media upload - resize images to max 1024px
   const handleMediaUpload = useCallback(
@@ -857,11 +871,6 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
             </div>
           ) : (
             messages.map((msg, index) => {
-              // Find the index of the last user message
-              const lastUserMessageIndex = messages.reduceRight(
-                (acc, m, i) => (acc === -1 && m.role === ROLES.USER ? i : acc),
-                -1,
-              );
               const isLastUserMessage = msg.role === ROLES.USER && index === lastUserMessageIndex;
 
               return (
