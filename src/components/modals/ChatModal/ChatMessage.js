@@ -79,7 +79,7 @@ const ChatMessage = ({
           {isUser && images?.length > 0 && (
             <span className="chat-message__images-info">
               {" "}
-              · {images.length} image{images.length > 1 ? "s" : ""}
+              · {images.length} img{images.length > 1 ? "s" : ""}
             </span>
           )}
           {!!avgTokens && (
