@@ -781,33 +781,30 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
                 isContextSaved ? "Update saved conversation" : "Save as conversation"
               }
             />
-            {availableKnowledgeBases.length > 0 &&
-              (showKnowledgeBaseSelect ? (
-                <MultiSelect
-                  id="knowledge-base-select"
-                  titleText=""
-                  label="Knowledge"
-                  hideLabel
-                  items={availableKnowledgeBases}
-                  selectedItems={selectedKnowledgeBases}
-                  itemToString={(item) => item?.name || ""}
-                  onChange={({ selectedItems }) => setSelectedKnowledgeBases(selectedItems)}
-                  size="sm"
-                  className="chat-modal__knowledge-select"
-                  disabled={isLoading}
-                />
-              ) : (
-                <Button
-                  kind="ghost"
-                  size="sm"
-                  tooltipPosition="right"
-                  renderIcon={NotebookReference}
-                  onClick={() => setShowKnowledgeBaseSelect(true)}
-                  disabled={isLoading}
-                  hasIconOnly
-                  iconDescription={"Add knowledge"}
-                />
-              ))}
+            {showContextDropdown ? (
+              <Dropdown
+                id="context-dropdown"
+                titleText=""
+                label="Load conversation"
+                items={availableContexts}
+                itemToString={(item) => item?.name || ""}
+                onChange={({ selectedItem }) => {
+                  if (selectedItem) handleLoadContext(selectedItem);
+                }}
+                size="sm"
+              />
+            ) : (
+              <Button
+                kind="ghost"
+                size="sm"
+                tooltipPosition="right"
+                renderIcon={FolderOpen}
+                onClick={() => setShowContextDropdown(true)}
+                disabled={isLoading || availableContexts.length === 0}
+                hasIconOnly
+                iconDescription="Load conversation"
+              />
+            )}
           </div>
           <div className="chat-modal__navbar-actions_center">
             {modelDisplayName && (
@@ -827,28 +824,30 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
             )}
           </div>
           <div className="chat-modal__navbar-actions_right">
-            {showContextDropdown ? (
-              <Dropdown
-                id="context-dropdown"
+            {showKnowledgeBaseSelect ? (
+              <MultiSelect
+                id="knowledge-base-select"
                 titleText=""
-                label="Load conversation"
-                items={availableContexts}
+                label="Knowledge"
+                hideLabel
+                items={availableKnowledgeBases}
+                selectedItems={selectedKnowledgeBases}
                 itemToString={(item) => item?.name || ""}
-                onChange={({ selectedItem }) => {
-                  if (selectedItem) handleLoadContext(selectedItem);
-                }}
+                onChange={({ selectedItems }) => setSelectedKnowledgeBases(selectedItems)}
                 size="sm"
+                className="chat-modal__knowledge-select"
+                disabled={isLoading}
               />
             ) : (
               <Button
                 kind="ghost"
                 size="sm"
                 tooltipPosition="left"
-                renderIcon={FolderOpen}
-                onClick={() => setShowContextDropdown(true)}
-                disabled={isLoading || availableContexts.length === 0}
+                renderIcon={NotebookReference}
+                onClick={() => setShowKnowledgeBaseSelect(true)}
+                disabled={isLoading || !availableKnowledgeBases?.length}
                 hasIconOnly
-                iconDescription="Load conversation"
+                iconDescription={"Add knowledge"}
               />
             )}
             <Button
@@ -865,7 +864,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         </div>
 
         <div className="chat-modal__messages" ref={messagesContainerRef}>
-          {messages.length === 0 ? (
+          {messages.length === 0 && !isLoading ? (
             <div className="chat-modal__empty">
               <em>Start a conversation by typing a message below.</em>
             </div>
