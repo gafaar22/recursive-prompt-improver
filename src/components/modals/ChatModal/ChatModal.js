@@ -26,8 +26,8 @@ import { resizeImage, estimateImageTokens } from "@utils/fileUtils";
 
 // Scroll behavior constants
 const PROGRAMMATIC_SCROLL_RESET_DELAY = 50; // ms to wait before re-enabling user scroll detection
-const SCROLL_DEBOUNCE_DELAY = 150; // ms to wait after scroll stops before checking position
-const SCROLL_BOTTOM_THRESHOLD = 100; // px from bottom to consider "at bottom"
+const SCROLL_DEBOUNCE_DELAY = 100; // ms to wait after scroll stops before checking position
+const SCROLL_BOTTOM_THRESHOLD = 50; // px from bottom to consider "at bottom"
 
 const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) => {
   const [messages, setMessages] = useState(formData?.chatMessages || []);
@@ -59,9 +59,9 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
   const isInitialMount = useRef(true);
   const isUpdatingFromParent = useRef(false);
   const lastScrollTime = useRef(0);
-  const isUserScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef(null);
   const isProgrammaticScrollRef = useRef(false);
+  const lastScrollTopRef = useRef(0);
 
   const { showSuccess, showError, showWarning } = useToast();
   const { confirm } = useConfirm();
@@ -104,7 +104,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       }
       return updatedMessages;
     },
-    [calculateAvgTokens]
+    [calculateAvgTokens],
   );
 
   /**
@@ -132,7 +132,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         setMessages(messagesWithTokens);
       }
     },
-    [addTokensToMessages]
+    [addTokensToMessages],
   );
 
   const scrollToBottom = () => {
@@ -152,7 +152,10 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
     const container = messagesContainerRef.current;
     if (!container) return true;
     // Check if user is within threshold of the bottom
-    return container.scrollHeight - container.scrollTop - container.clientHeight < SCROLL_BOTTOM_THRESHOLD;
+    return (
+      container.scrollHeight - container.scrollTop - container.clientHeight <
+      SCROLL_BOTTOM_THRESHOLD
+    );
   };
 
   const handleScroll = () => {
@@ -161,20 +164,34 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       return;
     }
 
-    // Mark as user scrolling
-    isUserScrollingRef.current = true;
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    const currentScrollTop = container.scrollTop;
+    const previousScrollTop = lastScrollTopRef.current;
+
+    // Only disable auto-scroll if the user scrolls UP (away from bottom)
+    // Scrolling down (towards bottom) or staying at bottom should not disable auto-scroll
+    const isScrollingUp = currentScrollTop < previousScrollTop;
+
+    // Update the last scroll position
+    lastScrollTopRef.current = currentScrollTop;
 
     // Clear any existing timeout
     if (scrollTimeoutRef.current) {
       clearTimeout(scrollTimeoutRef.current);
     }
 
-    // After scrolling stops, check if we should update auto-scroll state
-    scrollTimeoutRef.current = setTimeout(() => {
-      isUserScrollingRef.current = false;
+    // If user scrolled up, disable auto-scroll
+    if (isScrollingUp) {
+      shouldAutoScrollRef.current = false;
+    }
 
-      // Re-enable or disable auto-scroll based on position
-      shouldAutoScrollRef.current = isAtBottom();
+    // After scrolling stops, check if we should re-enable auto-scroll (user scrolled back to bottom)
+    scrollTimeoutRef.current = setTimeout(() => {
+      if (isAtBottom()) {
+        shouldAutoScrollRef.current = true;
+      }
     }, SCROLL_DEBOUNCE_DELAY);
   };
 
@@ -277,7 +294,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       if (selectedKnowledgeBases.length > 0) {
         const embeddingModel = getDefaultEmbeddingModel(
           settings.providers,
-          settings.defaultProviderId
+          settings.defaultProviderId,
         );
 
         if (embeddingModel) {
@@ -291,7 +308,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
               topK: RAG.RAG_CONFIG.TOP_K,
               minSimilarity: RAG.RAG_CONFIG.MIN_SIMILARITY,
               abortSignal: abortControllerRef.current.signal,
-            }
+            },
           );
 
           if (ragResult.context) {
@@ -443,7 +460,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       const actionText = isContextSaved ? "updated" : "saved";
       showSuccess(
         "Conversation Saved",
-        `Conversation "${contextName}" has been ${actionText} successfully`
+        `Conversation "${contextName}" has been ${actionText} successfully`,
       );
 
       setIsContextSaved(true);
@@ -494,7 +511,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       setShowContextDropdown(false);
       showSuccess(
         "Conversation Loaded",
-        `Conversation "${context.name}" has been loaded successfully`
+        `Conversation "${context.name}" has been loaded successfully`,
       );
     } catch (error) {
       console.error("Error loading conversation:", error);
@@ -525,7 +542,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       setIsContextSaved(false);
       showSuccess("Messages Removed", "Previous messages have been deleted");
     },
-    [confirm, messages, showSuccess]
+    [confirm, messages, showSuccess],
   );
 
   /**
@@ -562,7 +579,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         handleSendMessage(content, images || []);
       }
     },
-    [messages, handleSendMessage]
+    [messages, handleSendMessage],
   );
 
   /**
@@ -752,14 +769,14 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         setShowMediaUploadModal(false);
         showSuccess(
           "Images attached",
-          `${files.length} image${files.length > 1 ? "s" : ""} attached successfully`
+          `${files.length} image${files.length > 1 ? "s" : ""} attached successfully`,
         );
       } catch (error) {
         console.error("Error processing images:", error);
         showError("Upload Error", error?.message || "Failed to process images");
       }
     },
-    [showSuccess, showError]
+    [showSuccess, showError],
   );
 
   // Handle modal close - reset UI states
