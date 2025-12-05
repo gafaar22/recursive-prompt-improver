@@ -104,7 +104,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       }
       return updatedMessages;
     },
-    [calculateAvgTokens],
+    [calculateAvgTokens]
   );
 
   /**
@@ -132,7 +132,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         setMessages(messagesWithTokens);
       }
     },
-    [addTokensToMessages],
+    [addTokensToMessages]
   );
 
   const scrollToBottom = () => {
@@ -294,7 +294,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       if (selectedKnowledgeBases.length > 0) {
         const embeddingModel = getDefaultEmbeddingModel(
           settings.providers,
-          settings.defaultProviderId,
+          settings.defaultProviderId
         );
 
         if (embeddingModel) {
@@ -308,7 +308,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
               topK: RAG.RAG_CONFIG.TOP_K,
               minSimilarity: RAG.RAG_CONFIG.MIN_SIMILARITY,
               abortSignal: abortControllerRef.current.signal,
-            },
+            }
           );
 
           if (ragResult.context) {
@@ -460,7 +460,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       const actionText = isContextSaved ? "updated" : "saved";
       showSuccess(
         "Conversation Saved",
-        `Conversation "${contextName}" has been ${actionText} successfully`,
+        `Conversation "${contextName}" has been ${actionText} successfully`
       );
 
       setIsContextSaved(true);
@@ -511,7 +511,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       setShowContextDropdown(false);
       showSuccess(
         "Conversation Loaded",
-        `Conversation "${context.name}" has been loaded successfully`,
+        `Conversation "${context.name}" has been loaded successfully`
       );
     } catch (error) {
       console.error("Error loading conversation:", error);
@@ -542,7 +542,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       setIsContextSaved(false);
       showSuccess("Messages Removed", "Previous messages have been deleted");
     },
-    [confirm, messages, showSuccess],
+    [confirm, messages, showSuccess]
   );
 
   /**
@@ -579,7 +579,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         handleSendMessage(content, images || []);
       }
     },
-    [messages, handleSendMessage],
+    [messages, handleSendMessage]
   );
 
   /**
@@ -769,14 +769,14 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         setShowMediaUploadModal(false);
         showSuccess(
           "Images attached",
-          `${files.length} image${files.length > 1 ? "s" : ""} attached successfully`,
+          `${files.length} image${files.length > 1 ? "s" : ""} attached successfully`
         );
       } catch (error) {
         console.error("Error processing images:", error);
         showError("Upload Error", error?.message || "Failed to process images");
       }
     },
-    [showSuccess, showError],
+    [showSuccess, showError]
   );
 
   // Handle modal close - reset UI states
