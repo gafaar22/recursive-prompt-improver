@@ -1,6 +1,14 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { Modal, Button, InlineLoading, Dropdown, MultiSelect } from "@carbon/react";
-import { TrashCan, FolderOpen, Play, Save, Book, NotebookReference } from "@carbon/icons-react";
+import {
+  TrashCan,
+  FolderOpen,
+  Play,
+  Save,
+  Book,
+  NotebookReference,
+  ArrowDown,
+} from "@carbon/icons-react";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import UploadModal from "@components/modals/UploadModal";
@@ -51,6 +59,8 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
   const [externalMessage, setExternalMessage] = useState(null);
   // Pending retry state for "Retry" action on last message
   const [pendingRetry, setPendingRetry] = useState(null);
+  // Scroll to bottom button visibility
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
@@ -104,7 +114,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       }
       return updatedMessages;
     },
-    [calculateAvgTokens]
+    [calculateAvgTokens],
   );
 
   /**
@@ -132,7 +142,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         setMessages(messagesWithTokens);
       }
     },
-    [addTokensToMessages]
+    [addTokensToMessages],
   );
 
   const scrollToBottom = () => {
@@ -187,10 +197,15 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       shouldAutoScrollRef.current = false;
     }
 
+    // Show/hide scroll button based on position
+    const atBottom = isAtBottom();
+    setShowScrollButton(!atBottom);
+
     // After scrolling stops, check if we should re-enable auto-scroll (user scrolled back to bottom)
     scrollTimeoutRef.current = setTimeout(() => {
       if (isAtBottom()) {
         shouldAutoScrollRef.current = true;
+        setShowScrollButton(false);
       }
     }, SCROLL_DEBOUNCE_DELAY);
   };
@@ -294,7 +309,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       if (selectedKnowledgeBases.length > 0) {
         const embeddingModel = getDefaultEmbeddingModel(
           settings.providers,
-          settings.defaultProviderId
+          settings.defaultProviderId,
         );
 
         if (embeddingModel) {
@@ -308,7 +323,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
               topK: RAG.RAG_CONFIG.TOP_K,
               minSimilarity: RAG.RAG_CONFIG.MIN_SIMILARITY,
               abortSignal: abortControllerRef.current.signal,
-            }
+            },
           );
 
           if (ragResult.context) {
@@ -460,7 +475,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       const actionText = isContextSaved ? "updated" : "saved";
       showSuccess(
         "Conversation Saved",
-        `Conversation "${contextName}" has been ${actionText} successfully`
+        `Conversation "${contextName}" has been ${actionText} successfully`,
       );
 
       setIsContextSaved(true);
@@ -511,7 +526,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       setShowContextDropdown(false);
       showSuccess(
         "Conversation Loaded",
-        `Conversation "${context.name}" has been loaded successfully`
+        `Conversation "${context.name}" has been loaded successfully`,
       );
     } catch (error) {
       console.error("Error loading conversation:", error);
@@ -542,7 +557,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
       setIsContextSaved(false);
       showSuccess("Messages Removed", "Previous messages have been deleted");
     },
-    [confirm, messages, showSuccess]
+    [confirm, messages, showSuccess],
   );
 
   /**
@@ -579,7 +594,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         handleSendMessage(content, images || []);
       }
     },
-    [messages, handleSendMessage]
+    [messages, handleSendMessage],
   );
 
   /**
@@ -769,14 +784,14 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
         setShowMediaUploadModal(false);
         showSuccess(
           "Images attached",
-          `${files.length} image${files.length > 1 ? "s" : ""} attached successfully`
+          `${files.length} image${files.length > 1 ? "s" : ""} attached successfully`,
         );
       } catch (error) {
         console.error("Error processing images:", error);
         showError("Upload Error", error?.message || "Failed to process images");
       }
     },
-    [showSuccess, showError]
+    [showSuccess, showError],
   );
 
   // Handle modal close - reset UI states
@@ -985,6 +1000,20 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
           )}
 
           <div ref={messagesEndRef} />
+
+          {showScrollButton && (
+            <button
+              className="chat-modal__scroll-button"
+              onClick={() => {
+                shouldAutoScrollRef.current = true;
+                scrollToBottom();
+                setShowScrollButton(false);
+              }}
+              aria-label="Scroll to bottom"
+            >
+              <ArrowDown size={20} />
+            </button>
+          )}
         </div>
 
         <div className="chat-modal__input">

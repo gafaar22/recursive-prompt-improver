@@ -97,6 +97,43 @@
     flex-direction: column;
     gap: $spacing-04;
     background-color: theme.$background;
+    position: relative;
+  }
+
+  &__scroll-button {
+    position: sticky;
+    bottom: $spacing-05;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: theme.$layer-02;
+    border: 1px solid theme.$border-subtle;
+    color: theme.$text-primary;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    margin: 0 auto;
+
+    &:hover {
+      background-color: theme.$layer-accent;
+      color: theme.$text-on-color;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    &:active {
+      transform: translateX(-50%) scale(0.95);
+    }
+
+    &:focus {
+      outline: 2px solid theme.$focus;
+      outline-offset: 2px;
+    }
   }
 
   &__empty {
