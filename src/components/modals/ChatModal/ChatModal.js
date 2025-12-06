@@ -158,6 +158,21 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
     }, PROGRAMMATIC_SCROLL_RESET_DELAY);
   };
 
+  const scrollToBottomSmooth = () => {
+    isProgrammaticScrollRef.current = true;
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+    // Reset programmatic scroll flag after smooth scroll completes
+    setTimeout(() => {
+      isProgrammaticScrollRef.current = false;
+    }, 500);
+  };
+
   const isAtBottom = () => {
     const container = messagesContainerRef.current;
     if (!container) return true;
@@ -1006,7 +1021,7 @@ const ChatModal = ({ isOpen, onClose, formData, onUpdateMessages, modalTitle }) 
               className="chat-modal__scroll-button"
               onClick={() => {
                 shouldAutoScrollRef.current = true;
-                scrollToBottom();
+                scrollToBottomSmooth();
                 setShowScrollButton(false);
               }}
               aria-label="Scroll to bottom"
