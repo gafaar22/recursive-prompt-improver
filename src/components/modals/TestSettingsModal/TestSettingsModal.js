@@ -69,7 +69,7 @@ const TestSettingsModal = ({
   const [tempUseJsonSchema, setTempUseJsonSchema] = useState(selectedUseJsonSchema || false);
   const [tempJsonSchema, setTempJsonSchema] = useState(selectedJsonSchema || "");
   const [tempJsonSchemaStrict, setTempJsonSchemaStrict] = useState(
-    selectedJsonSchemaStrict || false
+    selectedJsonSchemaStrict || false,
   );
   const [tempToolsCalled, setTempToolsCalled] = useState(selectedToolsCalled || []);
   const [tempKnowledgeBases, setTempKnowledgeBases] = useState(selectedKnowledgeBases || []);
@@ -95,18 +95,18 @@ const TestSettingsModal = ({
   // Get available models from all configured providers - memoized to prevent unnecessary recalculation
   const availableModels = useMemo(
     () => getAllAvailableModels(settings.providers),
-    [settings.providers]
+    [settings.providers],
   );
   const availableEmbeddings = useMemo(
     () => getAllAvailableEmbeddings(settings.providers),
-    [settings.providers]
+    [settings.providers],
   );
 
   // Create default model item (for "use core model" option) with capabilities from actual model
   const defaultModelItem = useMemo(() => {
     // Find the actual model in availableModels to get its capabilities
     const actualModel = availableModels.find(
-      (model) => model.id === coreModel?.id && model.providerId === coreModel?.providerId
+      (model) => model.id === coreModel?.id && model.providerId === coreModel?.providerId,
     );
     return {
       id: "default",
@@ -139,14 +139,14 @@ const TestSettingsModal = ({
       defaultEmbeddingDisplayName,
       defaultEmbeddingModel?.providerId,
       defaultEmbeddingModel?.providerName,
-    ]
+    ],
   );
 
   // Build model items list with default at the start, excluding the core model from available list
   const modelItems = useMemo(() => {
     // Filter out the core model from available models to avoid duplication
     const filteredModels = availableModels.filter(
-      (model) => !(model.id === coreModel?.id && model.providerId === coreModel?.providerId)
+      (model) => !(model.id === coreModel?.id && model.providerId === coreModel?.providerId),
     );
     return [defaultModelItem, ...filteredModels];
   }, [defaultModelItem, availableModels, coreModel?.id, coreModel?.providerId]);
@@ -159,7 +159,7 @@ const TestSettingsModal = ({
         !(
           model.id === defaultEmbeddingModel?.id &&
           model.providerId === defaultEmbeddingModel?.providerId
-        )
+        ),
     );
     return [defaultEmbeddingItem, ...filteredEmbeddings];
   }, [
@@ -174,7 +174,7 @@ const TestSettingsModal = ({
     if (!tempModel) return defaultModelItem;
     // Find the matching item in the list
     const found = modelItems.find(
-      (item) => item.id === tempModel.id && item.providerId === tempModel.providerId
+      (item) => item.id === tempModel.id && item.providerId === tempModel.providerId,
     );
     return found || tempModel;
   }, [tempModel, modelItems, defaultModelItem]);
@@ -185,7 +185,7 @@ const TestSettingsModal = ({
     // Find the matching item in the list
     const found = embeddingItems.find(
       (item) =>
-        item.id === tempEmbeddingModel.id && item.providerId === tempEmbeddingModel.providerId
+        item.id === tempEmbeddingModel.id && item.providerId === tempEmbeddingModel.providerId,
     );
     return found || tempEmbeddingModel;
   }, [tempEmbeddingModel, embeddingItems, defaultEmbeddingItem]);
@@ -202,7 +202,7 @@ const TestSettingsModal = ({
           item.id === CHECK_TYPES.EQUALITY.id ||
           (item.id === CHECK_TYPES.TOOLS_CALL.id && !hasAvailableTools),
       })),
-    [hasAvailableTools]
+    [hasAvailableTools],
   );
 
   useEffect(() => {
@@ -289,7 +289,7 @@ const TestSettingsModal = ({
       tempToolsCalled,
       tempKnowledgeBases,
       tempImages,
-    ]
+    ],
   );
 
   const initialData = useMemo(
@@ -316,7 +316,7 @@ const TestSettingsModal = ({
       selectedToolsCalled,
       selectedKnowledgeBases,
       selectedImages,
-    ]
+    ],
   );
 
   // Custom comparator for complex field comparisons
@@ -475,7 +475,7 @@ const TestSettingsModal = ({
       setShowMediaUploadModal(false);
       showSuccess(
         "Images attached",
-        `${files.length} image${files.length > 1 ? "s" : ""} attached`
+        `${files.length} image${files.length > 1 ? "s" : ""} attached`,
       );
     } catch (error) {
       console.error("Error processing images:", error);
@@ -572,7 +572,7 @@ const TestSettingsModal = ({
                     items={[{ id: "none", name: "No context" }, ...contexts]}
                     selectedItem={tempContext || { id: "none", name: "No context" }}
                     itemToString={(item) => item?.name || "No context"}
-                    disabled={!tempContext?.length}
+                    disabled={contexts.length === 0}
                     onChange={({ selectedItem }) => {
                       setTempContext(selectedItem.id === "none" ? null : selectedItem);
                     }}
@@ -671,7 +671,7 @@ const TestSettingsModal = ({
                     items={checkTypeItemsWithDisabled}
                     itemToString={(item) => item?.label || ""}
                     selectedItems={checkTypeItemsWithDisabled.filter((item) =>
-                      tempCheckTypes.includes(item.id)
+                      tempCheckTypes.includes(item.id),
                     )}
                     helperText={"Tools call check skips other checks"}
                     onChange={({ selectedItems }) => {
@@ -691,10 +691,10 @@ const TestSettingsModal = ({
                       if (hasToolsCall && hasJsonValid) {
                         // Remove the one that was not just selected (keep the most recent selection)
                         const wasToolsCallSelected = selectedItems.some(
-                          (item) => item.id === CHECK_TYPES.TOOLS_CALL.id
+                          (item) => item.id === CHECK_TYPES.TOOLS_CALL.id,
                         );
                         const wasJsonValidSelected = selectedItems.some(
-                          (item) => item.id === CHECK_TYPES.JSON_VALID.id
+                          (item) => item.id === CHECK_TYPES.JSON_VALID.id,
                         );
 
                         // Determine which was added more recently by checking previous state
@@ -822,7 +822,7 @@ const TestSettingsModal = ({
                                           />
                                         </div>
                                       );
-                                    }
+                                    },
                                   )}
                                 </div>
                               </div>
