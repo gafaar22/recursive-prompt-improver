@@ -3,7 +3,7 @@
   "version": "0.1.5",
   "description": "Recursive Prompt Improver - A desktop/web application for testing, improving, and managing LLM prompts with multi-provider support",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://d-barletta.github.io/Recursive-Prompt-Improver",
   "author": {
     "name": "d-barletta",
     "email": "davide.barletta@icloud.com"
@@ -28,7 +28,9 @@
     "build:executable": "cross-env NODE_ENV=production npm run build && npm run package",
     "build:executable:mac": "cross-env NODE_ENV=production npm run build && npm run package:mac",
     "build:executable:win": "cross-env NODE_ENV=production npm run build && npm run package:win",
-    "build:executable:linux": "cross-env NODE_ENV=production npm run build && npm run package:linux"
+    "build:executable:linux": "cross-env NODE_ENV=production npm run build && npm run package:linux",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@alexbruf/react-diff-viewer": "^3.1.5",
