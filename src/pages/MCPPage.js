@@ -159,7 +159,7 @@ const MCPPage = () => {
           checked ? "MCP Server Started" : "MCP Server Stopped",
           checked
             ? `Server is now running on port ${exposedServerConfig.port}`
-            : "Server has been stopped"
+            : "Server has been stopped",
         );
       } else {
         showError("Server Error", result.error || "Failed to toggle server");
@@ -269,7 +269,7 @@ const MCPPage = () => {
       editMode ? "MCP server updated" : "MCP server created",
       editMode
         ? "The MCP server has been updated successfully"
-        : "A new MCP server has been created"
+        : "A new MCP server has been created",
     );
   };
 
@@ -358,7 +358,7 @@ const MCPPage = () => {
       if (result.success) {
         showSuccess(
           "Connection refreshed",
-          `Connected successfully. Found ${result.toolCount} tools.`
+          `Connected successfully. Found ${result.toolCount} tools.`,
         );
       } else {
         showError("Connection failed", result.error);
@@ -655,6 +655,16 @@ const MCPPage = () => {
         </Column>
         {/* Connected Servers Table */}
         <Column lg={16} md={8} sm={4}>
+          {!serverStatus.isElectron && !isLoading && (
+            <InlineNotification
+              kind="warning"
+              title="Desktop App Required"
+              subtitle="MCP server connections are only available in the Electron desktop app. This feature allows you to connect to external Model Context Protocol servers."
+              hideCloseButton
+              lowContrast
+              className="margin-bottom-1rem"
+            />
+          )}
           {isLoading ? (
             <DataTableSkeleton
               showHeader={false}
